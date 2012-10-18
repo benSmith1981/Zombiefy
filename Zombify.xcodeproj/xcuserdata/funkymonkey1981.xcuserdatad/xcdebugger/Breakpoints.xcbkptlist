@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "1"
+   version = "1.0">
+   <FileBreakpoints>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "Wiggers/ViewController.m"
+         timestampString = "368198223.707276"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "182"
+         endingLineNumber = "182"
+         landmarkName = "-buttonPressed:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "Wiggers/ViewController.m"
+         timestampString = "368201525.823744"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "123"
+         endingLineNumber = "123"
+         landmarkName = "-ImagePicker"
+         landmarkType = "5">
+         <Locations>
+            <Location
+               shouldBeEnabled = "Yes"
+               ignoreCount = "0"
+               continueAfterRunningActions = "No"
+               symbolName = "-[ViewController imagePickerController:didFinishPickingMediaWithInfo:]"
+               urlString = "file://localhost/Users/funkymonkey1981/Dropbox/Iphone%20Stuff/Wiggers/Wiggers/ViewController.m"
+               timestampString = "368201530.940357"
+               startingColumnNumber = "2147483647"
+               endingColumnNumber = "2147483647"
+               startingLineNumber = "123"
+               endingLineNumber = "123">
+            </Location>
+            <Location
+               shouldBeEnabled = "Yes"
+               ignoreCount = "0"
+               continueAfterRunningActions = "No"
+               symbolName = "__70-[ViewController imagePickerController:didFinishPickingMediaWithInfo:]_block_invoke_0"
+               urlString = "file://localhost/Users/funkymonkey1981/Dropbox/Iphone%20Stuff/Wiggers/Wiggers/ViewController.m"
+               timestampString = "368201530.940885"
+               startingColumnNumber = "2147483647"
+               endingColumnNumber = "2147483647"
+               startingLineNumber = "123"
+               endingLineNumber = "123">
+            </Location>
+         </Locations>
+      </FileBreakpoint>
+   </FileBreakpoints>
+</Bucket>
