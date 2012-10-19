@@ -44,6 +44,9 @@
 
 #define FONT_TYPE @"DOUBLE FEATURE"
 
+#define KEY_CHAIN_USERNAME @"ZOMBIE"
+#define KEY_CHAIN_PASSWORD @"ZOMBIE_PASSWORD"
+
 #define IMG(name) [UIImage imageNamed:name]
 //#define FACE_IMAGE_NAMES [NSArray arrayWithObjects:@"mouth.png",@"mouth2.png", @"lefteye.png", @"lefteye2.png",  @"righteye.png",@"righteye2.png",nil]
 //@"yellowJumper1.png",@"yellowJumper2.png",@"medal.png", nil]

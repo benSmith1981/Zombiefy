@@ -22,7 +22,12 @@
 
 #import <AVFoundation/AVFoundation.h>
 #import "Sound.h"
-@interface MainScreenVC : UIViewController <UIImagePickerControllerDelegate, UIActionSheetDelegate,OverlayViewControllerDelegate, failedToDetectFeature>{
+
+#import "IAPStoreManager.h"
+#import "IAPProduct.h"
+#import  "SFHFKeychainUtils.h"
+
+@interface MainScreenVC : UIViewController <UIImagePickerControllerDelegate, UIActionSheetDelegate,OverlayViewControllerDelegate, failedToDetectFeature, IAPProductObserver>{
 
     GADBannerView *bannerView_;
     UIView *parentView;
@@ -49,6 +54,7 @@
 @property (nonatomic, strong) IBOutlet UIButton *recentImages;
 @property (nonatomic, strong) RecentImagesTableView *recentImageTable;
 @property (nonatomic, strong) UIImageView *activeImageView;
+@property (nonatomic,strong) IAPProduct *product;
 
 @property (nonatomic, retain) CameraVC *cameraVC;
 

@@ -21,6 +21,7 @@
 @synthesize recentImages, takePicture,recentImagesTitle1,recentImagesTitle2,takePicTitle1,takePicTitle2,blueCog,infoButton;
 @synthesize recentImageTable,mainTitle,head,cameraVC;
 @synthesize imageManip,soundButton;
+@synthesize product;
 
 - (void)viewDidLoad
 {
@@ -289,13 +290,6 @@
     
 }
 
-- (IBAction)AdFreePurchase:(id)sender {
-    //InAppPurchaseManager *purchase = [[InAppPurchaseManager alloc]initPrivate];
-    
-}
-
-
-
 #pragma mark - OverlayViewControllerDelegate
 
 // as a delegate we are being told a picture was taken
@@ -326,6 +320,100 @@
     [self dismissModalViewControllerAnimated:YES];
 
 
+}
+
+#pragma mark - INApp purchasing
+
+- (IBAction)AdFreePurchase:(id)sender {
+    //InAppPurchaseManager *purchase = [[InAppPurchaseManager alloc]initPrivate];
+    //[self buyButtonTapped:sender];
+    
+    if ([self IAPItemPurchased]) {
+        [self.adFree setTitle:@"Purchased" forState:UIControlStateNormal];
+        
+    } else {
+        // not purchased so show a view to prompt for purchase
+        UIAlertView *askToPurchase = [[UIAlertView alloc]
+                                      initWithTitle:@"Unlock"
+                                      message:@"Purchase Zombies?"
+                                      delegate:self
+                                      cancelButtonTitle:nil
+                                      otherButtonTitles:@"Yes", @"No", nil];
+        
+        askToPurchase.delegate = self;
+        [askToPurchase show];
+        
+    }
+}
+- (void)buyButtonTapped{
+    [product purchase];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 0) {
+        [self buyButtonTapped];
+    }
+    else
+    {
+        
+    }
+}
+
+// Start observing the product.
+- (void)initProduct:(NSString*)productIdentifier {
+    self.product = [[IAPStoreManager sharedInstance] productForIdentifier:productIdentifier];
+    [self.product addObserver:self];
+    
+}
+
+// If an error is encountered.
+// If we're requesting the In App Purchase's details from Apple.
+// If we've received the In App Purchase's details from Apple.
+// If a purchase was successfully made.
+// If a purchase was successfully restored.
+// If a purchase was initiated.
+- (void)iapProductWasUpdated:(IAPProduct*)iapProduct {
+    [self setButtonState];
+}
+
+// Just a snippet that shows the purchase state in use.
+- (void)setButtonState {
+    BOOL enabled = NO;
+    NSString* title = @"";
+    
+    if (self.product.isLoading) {
+        title = @"Loading...";
+    }
+    else if (self.product.isPurchasing) {
+        title = @"Purchasing...";
+    }
+    else if (self.product.isError) {
+        title = @"Error";
+    }
+    else if (self.product.isPurchased) {
+        title = @"Purchased";
+        [[NSUserDefaults standardUserDefaults] setValue:product.identifier forKey: productPurchase];
+        
+        if([[NSUserDefaults standardUserDefaults] boolForKey:productPurchase]){
+            NSLog(@"%@",productPurchase);
+        }
+    }
+    else if (self.product.isReadyForSale) {
+        title = self.product.price;
+        enabled = YES;
+    }
+    
+    [self.adFree setEnabled:enabled];
+    [self.adFree setTitle:title forState:UIControlStateNormal];
+}
+
+-(BOOL)IAPItemPurchased {
+    NSError *error = nil;
+    NSString *password = [SFHFKeychainUtils getPasswordForUsername:KEY_CHAIN_USERNAME andServiceName:nil error:&error];
+    if ([password isEqualToString:KEY_CHAIN_PASSWORD])
+        return YES;
+    else
+        return NO;
 }
 
 
