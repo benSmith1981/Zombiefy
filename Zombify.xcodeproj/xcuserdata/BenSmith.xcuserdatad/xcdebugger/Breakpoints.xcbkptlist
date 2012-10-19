@@ -7,52 +7,13 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Wiggers/ImageManipulationVC.m"
-         timestampString = "371679244.884682"
+         filePath = "Wiggers/MainScreenVC.m"
+         timestampString = "372362520.963501"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "995"
-         endingLineNumber = "995"
-         landmarkName = "-rightEyeButtonsSelected:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Wiggers/ImageManipulationVC.m"
-         timestampString = "371679244.884682"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1001"
-         endingLineNumber = "1001"
-         landmarkName = "-rightEyeButtonsSelected:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Wiggers/ImageManipulationVC.m"
-         timestampString = "371679244.884682"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "964"
-         endingLineNumber = "964"
-         landmarkName = "-leftEyeButtonsSelected:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Wiggers/ImageManipulationVC.m"
-         timestampString = "371679244.884682"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "970"
-         endingLineNumber = "970"
-         landmarkName = "-leftEyeButtonsSelected:"
+         startingLineNumber = "409"
+         endingLineNumber = "409"
+         landmarkName = "-setButtonState"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -60,51 +21,77 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Wiggers/MainScreenVC.m"
-         timestampString = "372355968.915716"
+         timestampString = "372362452.164334"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "133"
-         endingLineNumber = "133"
-         landmarkName = "-soundButtonSelected:"
+         startingLineNumber = "335"
+         endingLineNumber = "335"
+         landmarkName = "-AdFreePurchase:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Wiggers/ImageManipulationVC.m"
-         timestampString = "372024178.805506"
+         filePath = "Wiggers/SFHFKeychainUtils.m"
+         timestampString = "372363387.205586"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1170"
-         endingLineNumber = "1170"
-         landmarkName = "@implementation ImageManipulationVC"
-         landmarkType = "3">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Wiggers/ImageManipulationVC.m"
-         timestampString = "372024180.075482"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1178"
-         endingLineNumber = "1178"
-         landmarkName = "-updateFaceFeature:withCIFaceFeature:withFaceFeatureType:withSender:fromArray:"
+         startingLineNumber = "293"
+         endingLineNumber = "293"
+         landmarkName = "+storeUsername:andPassword:forServiceName:updateExisting:error:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Wiggers/ImageManipulationVC.m"
-         timestampString = "372124133.675465"
+         filePath = "Wiggers/MainScreenVC.m"
+         timestampString = "372363600.631493"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1123"
-         endingLineNumber = "1123"
-         landmarkName = "-createNewRightSBParts:"
+         startingLineNumber = "425"
+         endingLineNumber = "425"
+         landmarkName = "-IAPItemPurchased"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Wiggers/MainScreenVC.m"
+         timestampString = "372363602.308096"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "427"
+         endingLineNumber = "427"
+         landmarkName = "-IAPItemPurchased"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Wiggers/MainScreenVC.m"
+         timestampString = "372363670.059145"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "431"
+         endingLineNumber = "431"
+         landmarkName = "-Delete:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Wiggers/FaceImageProcessing.m"
+         timestampString = "372379781.03536"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "314"
+         endingLineNumber = "314"
+         landmarkName = "-dumpOverlayViewToImage"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

@@ -46,6 +46,7 @@
 
 #define KEY_CHAIN_USERNAME @"ZOMBIE"
 #define KEY_CHAIN_PASSWORD @"ZOMBIE_PASSWORD"
+#define KEY_SERVICE_NAME @"ZOMBIE_PACK"
 
 #define IMG(name) [UIImage imageNamed:name]
 //#define FACE_IMAGE_NAMES [NSArray arrayWithObjects:@"mouth.png",@"mouth2.png", @"lefteye.png", @"lefteye2.png",  @"righteye.png",@"righteye2.png",nil]
@@ -58,6 +59,7 @@
 //[NSArray arrayWithObjects:IMG(@"betterHairScaled.png"),  IMG(@"rightlargesideburnScaled.png"),IMG(@"leftlargesideburnScaled.png"), IMG(@"yellowJumper.png"), IMG(@"hair.png"), nil]
 //
 #define SELECTED_IMAGE IMG(@"Green_tick.png")
+#define PADLOCK_IMAGE IMG(@"padlockBlack.png")
 #define SOUNDBUTTONIMAGE IMG(@"X.png")
 
 #define MOUTH_PARTS [NSArray arrayWithObjects:@"mouth1.png",@"mouth2.png",@"mouth3.png",@"mouth4.png",@"mouth5.png",@"mouth6.png",@"mouth7.png",@"mouth8.png",@"mouth9.png",@"mouth10.png",@"mouth11.png", nil]
@@ -65,7 +67,7 @@
 #define RIGHTEYE_PARTS [NSArray arrayWithObjects:@"righteye1.png",@"righteye2.png",@"righteye3.png",@"righteye4.png",@"righteye5.png",@"righteye6.png",@"righteye7.png", @"righteye8.png",nil]
 #define EYE_PARTS [NSArray arrayWithObjects:@"righteye1.png",@"lefteye1.png",@"righteye2.png",@"lefteye2.png",@"righteye3.png",@"lefteye3.png",@"righteye4.png",@"lefteye4.png",@"righteye5.png",@"lefteye5.png",@"righteye6.png",@"lefteye6.png",@"righteye7.png",@"lefteye7.png",@"righteye8.png",@"lefteye8.png", nil]
 
-#define SCAR_PARTS [NSArray arrayWithObjects:@"scar2.png",@"scar1.png",@"scar3.png",@"scar4.png",@"scar5.png",@"scar6.png",@"scar7.png", nil]
+#define SCAR_PARTS [NSArray arrayWithObjects:@"scar1.png",@"scar2.png",@"scar3.png",@"scar4.png",@"scar5.png", nil]
 
 #define sounds [NSArray arrayWithObjects:@"TheUndead.mp3",@"laugh.mp3", nil]
 //#define sounds [NSArray arrayWithObjects:@"TheUndead.mp3", nil]

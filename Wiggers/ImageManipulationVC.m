@@ -28,9 +28,7 @@
 @synthesize activeImageView;
 //@synthesize xCoord,yCoord,width,height;
 @synthesize cameraVC;
-
-
-
+@synthesize product;
 
 -(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -516,22 +514,24 @@
 
 -(void)hideContainer:(UIView*)container withTag:(containerType)containerTypeParam{
     if(containerTypeParam == scarContainer){
-        showScarContainer = TRUE;
+        //showScarContainer = TRUE;
         showMouthContainer = FALSE;
         showEyeContainer = FALSE;
     }
     if(containerTypeParam == mouthContainer){
         showScarContainer = FALSE;
-        showMouthContainer = TRUE;
+        //showMouthContainer = TRUE;
         showEyeContainer = FALSE;
     }
     if(containerTypeParam == eyeContainer){
         showScarContainer = FALSE;
         showMouthContainer = FALSE;
-        showEyeContainer = TRUE;
+        //showEyeContainer = TRUE;
     }
     showScarContainer = FALSE;
-    
+    showMouthContainer = FALSE;
+    showEyeContainer = FALSE;
+
     [UIView beginAnimations:@"showView" context:nil];
     [UIView setAnimationDuration:0.7];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
@@ -577,6 +577,13 @@
             [self.delegate noFeaturesDetected];
             [self.navigationController popViewControllerAnimated:YES];
         }
+    }
+    else if ([alertView.title isEqualToString:@"Unlock Zombie Features"])
+    {
+        if (buttonIndex == 0) {
+            [self buyButtonTapped];
+        }
+        
     }
 }
 
@@ -671,9 +678,14 @@
             [aButton setBackgroundImage:SELECTED_IMAGE forState:UIControlStateNormal];
             aButton.selected = TRUE;
         }
-        else
+        else if ([hair isEqualToString:@"mouth2.png"] || [hair isEqualToString:@"mouth3.png"])
         {
             [aButton setBackgroundImage:nil forState:UIControlStateNormal];
+
+        }
+        else
+        {
+            [aButton setBackgroundImage:PADLOCK_IMAGE forState:UIControlStateNormal];
         }
         
         
@@ -692,10 +704,6 @@
     self.mouthScrollView.contentSize = CGSizeMake((buttonHeight + 10) * numberOfButtons, pagesScrollViewSize.height);
     [self.mouthScrollView setShowsHorizontalScrollIndicator:NO];
     
-
-    
-
-
 }
 
 -(void)loadEyeScrollView{
@@ -886,7 +894,7 @@
         [aButton addTarget:self action:@selector(scarButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
         aButton.tag = tag;
         tag++;
-        if ([scar isEqualToString:@"scar2.png"])
+        if ([scar isEqualToString:@"scar1.png"])
         {
             [aButton setBackgroundImage:SELECTED_IMAGE forState:UIControlStateNormal];
             aButton.selected = TRUE;
@@ -1180,6 +1188,7 @@
         [facePart setType:featureType];
         facePart.featureImageView = faceFeatureParam.featureImageView;
         facePart.featureBelongsToo = feature;
+        facePart.isShown = FALSE;
     }
     else //if(featureType != scarType)
     {
@@ -1268,6 +1277,104 @@
     }
     return YES;
 }
+
+- (IBAction)AdFreePurchase:(id)sender {
+    //InAppPurchaseManager *purchase = [[InAppPurchaseManager alloc]initPrivate];
+    //[self buyButtonTapped:sender];
+    
+    if ([self IAPItemPurchased]) {
+        //[self.adFree setTitle:@"Purchased" forState:UIControlStateNormal];
+        
+    } else {
+        // not purchased so show a view to prompt for purchase
+        UIAlertView *askToPurchase = [[UIAlertView alloc]
+                                      initWithTitle:@"Unlock ALL Zombie Features"
+                                      message:@"Please tap YES to purchase all Zombie features"
+                                      delegate:self
+                                      cancelButtonTitle:nil
+                                      otherButtonTitles:@"Yes", @"No", nil];
+        
+        askToPurchase.delegate = self;
+        [askToPurchase show];
+        
+    }
+}
+
+
+
+
+- (void)buyButtonTapped{
+    //[product purchase];
+    
+    //for testing
+    //NSString *title = @"Purchased";
+    //[self.adFree setTitle:title forState:UIControlStateNormal];
+    NSError *error = nil;
+    [SFHFKeychainUtils storeUsername:KEY_CHAIN_USERNAME andPassword:KEY_CHAIN_PASSWORD forServiceName:KEY_SERVICE_NAME updateExisting:YES error:&error];
+    
+    
+}
+
+// Start observing the product.
+- (void)initProduct:(NSString*)productIdentifier {
+    self.product = [[IAPStoreManager sharedInstance] productForIdentifier:productIdentifier];
+    [self.product addObserver:self];
+    
+}
+
+// If an error is encountered.
+// If we're requesting the In App Purchase's details from Apple.
+// If we've received the In App Purchase's details from Apple.
+// If a purchase was successfully made.
+// If a purchase was successfully restored.
+// If a purchase was initiated.
+- (void)iapProductWasUpdated:(IAPProduct*)iapProduct {
+    [self setButtonState];
+}
+
+// Just a snippet that shows the purchase state in use.
+- (void)setButtonState {
+    BOOL enabled = NO;
+    NSString* title = @"";
+    
+    if (self.product.isLoading) {
+        title = @"Loading...";
+    }
+    else if (self.product.isPurchasing) {
+        title = @"Purchasing...";
+    }
+    else if (self.product.isError) {
+        title = @"Error";
+    }
+    else if (self.product.isPurchased) {
+        title = @"Purchased";
+        NSError *error = nil;
+        [SFHFKeychainUtils storeUsername:KEY_CHAIN_USERNAME andPassword:KEY_CHAIN_PASSWORD forServiceName:KEY_SERVICE_NAME updateExisting:YES error:&error];
+        
+    }
+    else if (self.product.isReadyForSale) {
+        title = self.product.price;
+        enabled = YES;
+    }
+    
+//    [self.adFree setEnabled:enabled];
+//    [self.adFree setTitle:title forState:UIControlStateNormal];
+}
+
+-(BOOL)IAPItemPurchased {
+    NSError *error = nil;
+    NSString *password = [SFHFKeychainUtils getPasswordForUsername:KEY_CHAIN_USERNAME andServiceName:KEY_SERVICE_NAME error:&error];
+    if ([password isEqualToString:KEY_CHAIN_PASSWORD])
+        return TRUE;
+    else
+        return FALSE;
+}
+
+
+
+
+
+
 - (void)viewDidUnload {
 //    [self setRotation:nil];
     [self setLoadingWheel:nil];

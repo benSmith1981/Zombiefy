@@ -111,6 +111,7 @@
     [self setTakePicture:nil];
     [self setAdFree:nil];
     [self setSoundButton:nil];
+    [self setDelete:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -122,6 +123,8 @@
 }
 
 #pragma mark - Sound BUtton Selected
+
+
 - (IBAction)soundButtonSelected:(id)sender{
     //UIButton *button = sender;
     if([Sound retrieveSingleton].soundOn)
@@ -345,9 +348,7 @@
         
     }
 }
-- (void)buyButtonTapped{
-    [product purchase];
-}
+
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 0) {
@@ -357,6 +358,18 @@
     {
         
     }
+}
+
+- (void)buyButtonTapped{
+    //[product purchase];
+    
+    //for testing
+    NSString *title = @"Purchased";
+    [self.adFree setTitle:title forState:UIControlStateNormal];
+    NSError *error = nil;
+    [SFHFKeychainUtils storeUsername:KEY_CHAIN_USERNAME andPassword:KEY_CHAIN_PASSWORD forServiceName:KEY_SERVICE_NAME updateExisting:YES error:&error];
+    
+
 }
 
 // Start observing the product.
@@ -392,11 +405,9 @@
     }
     else if (self.product.isPurchased) {
         title = @"Purchased";
-        [[NSUserDefaults standardUserDefaults] setValue:product.identifier forKey: productPurchase];
-        
-        if([[NSUserDefaults standardUserDefaults] boolForKey:productPurchase]){
-            NSLog(@"%@",productPurchase);
-        }
+        NSError *error = nil;
+        [SFHFKeychainUtils storeUsername:KEY_CHAIN_USERNAME andPassword:KEY_CHAIN_PASSWORD forServiceName:KEY_SERVICE_NAME updateExisting:YES error:&error];
+
     }
     else if (self.product.isReadyForSale) {
         title = self.product.price;
@@ -409,11 +420,16 @@
 
 -(BOOL)IAPItemPurchased {
     NSError *error = nil;
-    NSString *password = [SFHFKeychainUtils getPasswordForUsername:KEY_CHAIN_USERNAME andServiceName:nil error:&error];
+    NSString *password = [SFHFKeychainUtils getPasswordForUsername:KEY_CHAIN_USERNAME andServiceName:KEY_SERVICE_NAME error:&error];
     if ([password isEqualToString:KEY_CHAIN_PASSWORD])
-        return YES;
+        return TRUE;
     else
-        return NO;
+        return FALSE;
+}
+
+- (IBAction)Delete:(id)sender {
+    NSError *error = nil;
+    [SFHFKeychainUtils deleteItemForUsername:KEY_CHAIN_USERNAME andServiceName:KEY_SERVICE_NAME error:&error];
 }
 
 

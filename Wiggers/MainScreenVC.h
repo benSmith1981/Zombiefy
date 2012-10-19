@@ -39,6 +39,7 @@
     
     Sound *soundPlayer;
 }
+@property (weak, nonatomic) IBOutlet UIButton *Delete;
 @property (weak, nonatomic) IBOutlet UIButton *soundButton;
 @property (nonatomic,strong) ImageManipulationVC *imageManip;
 @property (weak, nonatomic) IBOutlet UIButton *adFree;
@@ -57,6 +58,7 @@
 @property (nonatomic,strong) IAPProduct *product;
 
 @property (nonatomic, retain) CameraVC *cameraVC;
+- (IBAction)Delete:(id)sender;
 
 - (IBAction)soundButtonSelected:(id)sender;
 - (IBAction)buttonPressed:(id)sender;

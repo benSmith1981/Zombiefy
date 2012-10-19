@@ -169,8 +169,8 @@
 -(void)setImageWithImageViews:(NSMutableArray*)faceFeatures{
     UIImage *faceImage = activeImageView.image;
 
-    UILabel *wiggofy = [[UILabel alloc]initWithFrame:CGRectMake(10,5,140,37)];
-    wiggofy = [self drawText:@"@Zombiefy" InUILabel:wiggofy withFrame:wiggofy.frame colour:[UIColor whiteColor] ofFontType:[UIFont fontWithName:FONT_TYPE size:25]];
+    UILabel *wiggofy = [[UILabel alloc]initWithFrame:CGRectMake(10,5,145,37)];
+    wiggofy = [self drawText:@"@Zzombiefy" InUILabel:wiggofy withFrame:wiggofy.frame colour:[UIColor whiteColor] ofFontType:[UIFont fontWithName:FONT_TYPE size:25]];
 
     UIGraphicsBeginImageContextWithOptions(faceImage.size, YES, 0);
     [faceImage drawInRect:activeImageView.bounds];
@@ -192,14 +192,15 @@
     
     
     for (faceFeature *faceparts in faceFeatures) {
-        [activeImageView addSubview:faceparts.featureImageView];
+        if(faceparts.isShown)
+            [activeImageView addSubview:faceparts.featureImageView];
     }
     [activeImageView addSubview:wiggofy];
     
     //render it into the activeImageView then we can post or whatever
-    [activeImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
-    activeImageView.image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+//    [activeImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
+//    activeImageView.image = UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsEndImageContext();
     activeImageView.image = [self dumpOverlayViewToImage];//]:activeImageView];
     activeFacePart = nil;
     
@@ -294,8 +295,8 @@
             break;
         case 7:// scarType
 
-           imageView.image = [imageView.image imageByScalingProportionallyToSize:CGSizeMake(imageView.image.size.width,imageView.image.size.height)];
-            imageView.frame = CGRectMake(f.bounds.origin.x + (faceWidth*0.5 - imageView.image.size.width/2), IMG_HEIGHT - (f.bounds.origin.y + faceHeight + imageView.image.size.height), imageView.image.size.width, imageView.image.size.height);
+           imageView.image = [imageView.image imageByScalingProportionallyToSize:CGSizeMake(faceWidth*0.3,faceHeight*0.3)];
+            imageView.frame = CGRectMake(f.bounds.origin.x + (faceWidth*0.7 - imageView.image.size.width/2), IMG_HEIGHT - (f.bounds.origin.y + faceHeight*0.9 + imageView.image.size.height), imageView.image.size.width, imageView.image.size.height);
             [newFaceFeature setType:featureType];
             newFaceFeature.featureImageView = imageView;
             newFaceFeature.featureBelongsToo = f;

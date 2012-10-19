@@ -26,11 +26,16 @@
 #import <AVFoundation/AVFoundation.h>
 #import "Sound.h"
 
+#import "IAPStoreManager.h"
+#import "IAPProduct.h"
+#import  "SFHFKeychainUtils.h"
+
+
 @protocol failedToDetectFeature
 - (void)noFeaturesDetected;
 @end
 
-@interface ImageManipulationVC : UIViewController <UIGestureRecognizerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate> {
+@interface ImageManipulationVC : UIViewController <UIGestureRecognizerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,IAPProductObserver> {
     //Image Views for body parts
     NSArray *arrayOfFaceParts;
     NSDictionary *dictOfFaceParts;
@@ -96,6 +101,8 @@
     
     __weak id <failedToDetectFeature> delegate;
 }
+/** This is object to access the in app purchase wrapper*/
+@property (nonatomic,strong) IAPProduct *product;
 /**  Twitter tag label on images*/
 @property (weak, nonatomic) IBOutlet UILabel *wiggofy;
 /** Label appearing at bottom of screen if we so wish*/
