@@ -27,7 +27,7 @@
 {
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:YES];
-    
+    //[self initProduct:kInAppPurchaseProductID];
 
 //    NSString *pewPewPath = [[NSBundle mainBundle] pathForResource:@"TheUndead" ofType:@"mp3"];
 //    Sound *soundInst = [[Sound alloc]initialiseSound:pewPewPath];
@@ -41,7 +41,7 @@
 //	AudioServicesCreateSystemSoundID((__bridge)pewPewURL, &_pewPewSound);
 //    AudioServicesPlaySystemSound(_pewPewSound);
     
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:productPurchase]) {
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:kInAppPurchaseProductID]) {
         // Create a view of the standard size at the bottom of the screen.
         // Available AdSize constants are explained in GADAdSize.h.
         bannerView_ = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
@@ -195,7 +195,7 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     self.activeImageView = nil;
     UIImageView *imageView = [[UIImageView alloc]init];
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:productPurchase]) {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:kInAppPurchaseProductID]) {
         imageView.frame = CGRectMake(IMG_X,IMG_Y, IMG_HEIGHT_NO_ADS, IMG_HEIGHT_NO_ADS);
     }
     else {
@@ -361,13 +361,13 @@
 }
 
 - (void)buyButtonTapped{
-    //[product purchase];
+    [product purchase];
     
     //for testing
-    NSString *title = @"Purchased";
-    [self.adFree setTitle:title forState:UIControlStateNormal];
-    NSError *error = nil;
-    [SFHFKeychainUtils storeUsername:KEY_CHAIN_USERNAME andPassword:KEY_CHAIN_PASSWORD forServiceName:KEY_SERVICE_NAME updateExisting:YES error:&error];
+//    NSString *title = @"Purchased";
+//    [self.adFree setTitle:title forState:UIControlStateNormal];
+//    NSError *error = nil;
+//    [SFHFKeychainUtils storeUsername:KEY_CHAIN_USERNAME andPassword:KEY_CHAIN_PASSWORD forServiceName:KEY_SERVICE_NAME updateExisting:YES error:&error];
     
 
 }
@@ -375,7 +375,7 @@
 // Start observing the product.
 - (void)initProduct:(NSString*)productIdentifier {
     self.product = [[IAPStoreManager sharedInstance] productForIdentifier:productIdentifier];
-    [self.product addObserver:self];
+    //[self.product addObserver:self];
     
 }
 
@@ -432,5 +432,31 @@
     [SFHFKeychainUtils deleteItemForUsername:KEY_CHAIN_USERNAME andServiceName:KEY_SERVICE_NAME error:&error];
 }
 
+- (IBAction)restorePreviousTransaction:(id)sender {
+    //[self.product restorePurchase];
+    if([self.product isRestored])
+    {
+        UIAlertView *restore = [[UIAlertView alloc]
+                                      initWithTitle:@"Restore"
+                                      message:@"Previous Purchases have been restored"
+                                      delegate:nil
+                                      cancelButtonTitle:@"OK"
+                                      otherButtonTitles:nil];
+        [restore show];
+
+        NSError *error = nil;
+        [SFHFKeychainUtils storeUsername:KEY_CHAIN_USERNAME andPassword:KEY_CHAIN_PASSWORD forServiceName:KEY_SERVICE_NAME updateExisting:YES error:&error];
+    }
+    else
+    {
+        UIAlertView *restore = [[UIAlertView alloc]
+                                initWithTitle:@"Not Restored"
+                                message:@"Previous Purchases have NOT been restored"
+                                delegate:nil
+                                cancelButtonTitle:@"OK"
+                                otherButtonTitles:nil];
+        [restore show];
+    }
+}
 
 @end

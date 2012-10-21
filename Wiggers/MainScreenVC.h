@@ -27,7 +27,7 @@
 #import "IAPProduct.h"
 #import  "SFHFKeychainUtils.h"
 
-@interface MainScreenVC : UIViewController <UIImagePickerControllerDelegate, UIActionSheetDelegate,OverlayViewControllerDelegate, failedToDetectFeature, IAPProductObserver>{
+@interface MainScreenVC : UIViewController <UIImagePickerControllerDelegate, UIActionSheetDelegate,OverlayViewControllerDelegate, failedToDetectFeature>{
 
     GADBannerView *bannerView_;
     UIView *parentView;
@@ -65,7 +65,7 @@
 - (IBAction)AdFreePurchase:(id)sender;
 - (void)ImagePicker;
 - (void)showImagePicker:(UIImagePickerControllerSourceType)sourceType;
-
+- (IBAction)restorePreviousTransaction:(id)sender;
 
 
 @end

@@ -199,17 +199,17 @@
 					</object>
 					<object class="IBUIButton" id="734823773">
 						<reference key="NSNextResponder" ref="304971427"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{7, 89}, {80, 37}}</string>
+						<int key="NSvFlags">-2147483356</int>
+						<string key="NSFrame">{{7, 85}, {80, 44}}</string>
 						<reference key="NSSuperview" ref="304971427"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="645835011"/>
+						<reference key="NSNextKeyView" ref="547356259"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">Ad Free</string>
+						<string key="IBUINormalTitle">Restore</string>
 						<reference key="IBUIHighlightedTitleColor" ref="413565659"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
@@ -246,7 +246,6 @@
 						<string key="NSFrame">{{86, 346}, {148, 35}}</string>
 						<reference key="NSSuperview" ref="304971427"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
@@ -297,7 +296,7 @@
 							<string key="NSResourceName">SoundButton.png</string>
 						</object>
 					</object>
-					<object class="IBUIButton" id="645835011">
+					<object class="IBUIButton" id="547356259">
 						<reference key="NSNextResponder" ref="304971427"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{12, 133}, {70, 44}}</string>
@@ -383,14 +382,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">adFree</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="734823773"/>
-					</object>
-					<int key="connectionID">89</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">recentImagesTitle1</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="268280763"/>
@@ -417,7 +408,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">Delete</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="645835011"/>
+						<reference key="destination" ref="547356259"/>
 					</object>
 					<int key="connectionID">102</int>
 				</object>
@@ -450,12 +441,12 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">AdFreePurchase:</string>
+						<string key="label">restorePreviousTransaction:</string>
 						<reference key="source" ref="734823773"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">91</int>
+					<int key="connectionID">104</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -469,7 +460,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">Delete:</string>
-						<reference key="source" ref="645835011"/>
+						<reference key="source" ref="547356259"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
@@ -509,7 +500,7 @@
 							<reference ref="78223714"/>
 							<reference ref="432398430"/>
 							<reference ref="83202955"/>
-							<reference ref="645835011"/>
+							<reference ref="547356259"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -567,7 +558,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">100</int>
-						<reference key="object" ref="645835011"/>
+						<reference key="object" ref="547356259"/>
 						<reference key="parent" ref="304971427"/>
 					</object>
 				</array>
@@ -598,7 +589,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">103</int>
+			<int key="maxID">104</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -609,6 +600,7 @@
 						<string key="AdFreePurchase:">id</string>
 						<string key="Delete:">id</string>
 						<string key="buttonPressed:">id</string>
+						<string key="restorePreviousTransaction:">id</string>
 						<string key="soundButtonSelected:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
@@ -622,6 +614,10 @@
 						</object>
 						<object class="IBActionInfo" key="buttonPressed:">
 							<string key="name">buttonPressed:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="restorePreviousTransaction:">
+							<string key="name">restorePreviousTransaction:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="soundButtonSelected:">

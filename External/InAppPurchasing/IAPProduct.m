@@ -151,6 +151,10 @@ const NSString* kEventRestoreEnded = @"RestoreEnded";
     if (self.state == kStateRestoring) {
         [self.stateMachine applyEvent:kEventRestoreEnded];
     }
+//    for (NSValue* observer in self.observers) {
+//        id<IAPProductObserver> iapProductObserver = [observer nonretainedObjectValue];
+//        [iapProductObserver iapProductWasUpdated:self];
+//    }
 }
 
 - (NSString*)settingsKey:(NSString*)setting {

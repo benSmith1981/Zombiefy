@@ -34,8 +34,9 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
 
+        [self initProduct:kInAppPurchaseProductID];
         //intialise toolbar
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:productPurchase]) {
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:kInAppPurchaseProductID]) {
             toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(TOOLBAR_X_POSITION_NO_ADS, TOOLBAR_Y_POSITION_NO_ADS, TOOLBAR_WIDTH, TOOLBAR_HEIGHT)];
         }
         else {
@@ -114,7 +115,7 @@
 
     
    // NSLog(@"height %f width %f",bannerView_.frame.size.height,bannerView_.frame.size.width);
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:productPurchase]) {
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:kInAppPurchaseProductID]) {
         // Create a view of the standard size at the bottom of the screen.
         // Available AdSize constants are explained in GADAdSize.h.
         bannerView_ = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
@@ -136,7 +137,7 @@
     //set to false intially
     //doneEditing = FALSE;
         
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:productPurchase]) {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:kInAppPurchaseProductID]) {
         canvas = [[UIView alloc]initWithFrame:CGRectMake(0, 0, IMG_WIDTH_NO_ADS, IMG_HEIGHT_NO_ADS)];
     }
     else {
@@ -578,7 +579,7 @@
             [self.navigationController popViewControllerAnimated:YES];
         }
     }
-    else if ([alertView.title isEqualToString:@"Unlock Zombie Features"])
+    else if ([alertView.title isEqualToString:@"Unlock ALL Zombie Features"])
     {
         if (buttonIndex == 0) {
             [self buyButtonTapped];
@@ -642,7 +643,7 @@
         [[self.view layer] addSublayer:_marque];
         //add info over canvas
         //[self.view bringSubviewToFront:Info];
-        if (![[NSUserDefaults standardUserDefaults] boolForKey:productPurchase]) {
+        if (![[NSUserDefaults standardUserDefaults] boolForKey:kInAppPurchaseProductID]) {
             [self.view bringSubviewToFront:bannerView_];
         }
         [self.view bringSubviewToFront:toolBar];
@@ -651,14 +652,56 @@
         [soundPlayer playSound:[soundPlayer.funnyClipsPlayer objectAtIndex:1] numberofTimes:1];
     }
 }
+-(void)drawPadlock:(UIButton*)padlockButton orSelectedButton:(UIButton*)selectButton onScrollView:(UIScrollView*)scrollView overImageWithString:(NSString*)imageString andButtonCounter:(int)selectedTag andAddToArray:(NSMutableArray*)buttonsArray withSelectedButtonString:(NSString*)selectedButtonString{
+    if([self IAPItemPurchased])
+    {
+        if ([imageString isEqualToString:selectedButtonString])
+        {
+            [selectButton setBackgroundImage:SELECTED_IMAGE forState:UIControlStateNormal];
+            selectButton.selected = TRUE;
+            
+        }
+        else
+            [selectButton setBackgroundImage:nil forState:UIControlStateNormal];
+        
+        [scrollView addSubview:selectButton];
+        [buttonsArray addObject:selectButton];
+    }
+    else
+    {
+        if (selectedTag <=NUM_FREE_FEATURES) {
+            if ([imageString isEqualToString:selectedButtonString])
+            {
+                [selectButton setBackgroundImage:SELECTED_IMAGE forState:UIControlStateNormal];
+                selectButton.selected = TRUE;
+                
+            }
+            else
+                [selectButton setBackgroundImage:nil forState:UIControlStateNormal];
+            
+            [scrollView addSubview:selectButton];
+            [buttonsArray addObject:selectButton];
+            
+            
+        }
+        else{
+            [padlockButton setBackgroundImage:PADLOCK_IMAGE forState:UIControlStateNormal];
+            [padlockButton setBackgroundImage:PADLOCK_IMAGE forState:UIControlStateSelected];
+            [scrollView addSubview:padlockButton];
+            [buttonsArray addObject:padlockButton];
+        }
+    }
+}
 
 -(void)loadMouthScrollView{
     
     //Make the buttons on the Scrollview match up to the images in our face parts array
-    int tag = 0;
+    int selectedTag = 0;
     mouthButtons = [[NSMutableArray alloc]init];
 
-    UIButton *aButton;
+    UIButton *selectButton;
+    UIButton *padlockButton;
+
     // Set up the content size of the scroll view
     CGSize pagesScrollViewSize = self.mouthScrollView.frame.size;
     int buttonHeight = pagesScrollViewSize.height;
@@ -669,36 +712,29 @@
     int page = 0;
     
     for (NSString *hair in MOUTH_PARTS) {
-        aButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [aButton addTarget:self action:@selector(mouthButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-        aButton.tag = tag;
-        tag++;
-        if ([hair isEqualToString:@"mouth1.png"])
-        {
-            [aButton setBackgroundImage:SELECTED_IMAGE forState:UIControlStateNormal];
-            aButton.selected = TRUE;
-        }
-        else if ([hair isEqualToString:@"mouth2.png"] || [hair isEqualToString:@"mouth3.png"])
-        {
-            [aButton setBackgroundImage:nil forState:UIControlStateNormal];
-
-        }
-        else
-        {
-            [aButton setBackgroundImage:PADLOCK_IMAGE forState:UIControlStateNormal];
-        }
+        selectButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [selectButton addTarget:self action:@selector(mouthButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
+        selectButton.tag = selectedTag;
         
+        padlockButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [padlockButton addTarget:self action:@selector(AdFreePurchase:) forControlEvents:UIControlEventTouchUpInside];
+        //padlockButton.tag = tag;
+        selectedTag++;
         
         frame = CGRectMake(0, 0, buttonWidth, buttonHeight);
         frame.origin.x = (buttonWidth + 10) * page ;
         frame.origin.y = 0.0f;
-        aButton.frame = frame;
+        selectButton.frame = frame;
+        padlockButton.frame = frame;
         UIImageView *buttonImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:hair]];
         buttonImageView.frame = frame;
+        
         [self.mouthScrollView addSubview:buttonImageView];
-        [self.mouthScrollView addSubview:aButton];
+
+        [self drawPadlock:padlockButton orSelectedButton:selectButton onScrollView:mouthScrollView overImageWithString:hair andButtonCounter:selectedTag andAddToArray:mouthButtons withSelectedButtonString:@"mouth1.png"];
+        
+
         page++;
-        [mouthButtons addObject:aButton];
     }
     int numberOfButtons = [mouthButtons count];
     self.mouthScrollView.contentSize = CGSizeMake((buttonHeight + 10) * numberOfButtons, pagesScrollViewSize.height);
@@ -714,6 +750,10 @@
     rightEyeButtons = [[NSMutableArray alloc]init];
     UIButton *leftButton;
     UIButton *rightButton;
+    
+    UIButton *padlockButton;
+
+    
     // Set up the content size of the scroll view
     CGSize pagesScrollViewSize = self.eyeScrollView.frame.size;
     int buttonHeight = pagesScrollViewSize.height;
@@ -723,9 +763,11 @@
     CGRect frame;
     int page = 0;
     
+    
     for (NSString *hair in EYE_PARTS) {
         leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
         rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        
         frame = CGRectMake(0, 0, buttonWidth, buttonHeight);
         frame.origin.x = (buttonWidth + 10) * page;
         frame.origin.y = 0.0f;
@@ -733,6 +775,9 @@
         if ([hair isEqualToString:[NSString stringWithFormat:@"lefteye%i.png",leftTag+1]])
         {
             [leftButton addTarget:self action:@selector(leftEyeButtonsSelected:) forControlEvents:UIControlEventTouchUpInside];
+            padlockButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            [padlockButton addTarget:self action:@selector(AdFreePurchase:) forControlEvents:UIControlEventTouchUpInside];
+            
             leftButton.tag = leftTag;
             if(leftTag == 0)
             {
@@ -744,15 +789,20 @@
             leftTag++;
             
             leftButton.frame = frame;
+            padlockButton.frame = frame;
             UIImageView *buttonImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:hair]];
             buttonImageView.frame = frame;
             [self.eyeScrollView addSubview:buttonImageView];
-            [self.eyeScrollView addSubview:leftButton];
-            [leftEyeButtons addObject:leftButton];
+//            [self.eyeScrollView addSubview:leftButton];
+//            [leftEyeButtons addObject:leftButton];
+            [self drawPadlock:padlockButton orSelectedButton:leftButton onScrollView:eyeScrollView overImageWithString:hair andButtonCounter:leftTag andAddToArray:leftEyeButtons withSelectedButtonString:[NSString stringWithFormat:@"lefteye%i.png",leftTag+1]];
         }
         else if ([hair isEqualToString:[NSString stringWithFormat:@"righteye%i.png",rightTag+1]])
         {
             [rightButton addTarget:self action:@selector(rightEyeButtonsSelected:) forControlEvents:UIControlEventTouchUpInside];
+            padlockButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            [padlockButton addTarget:self action:@selector(AdFreePurchase:) forControlEvents:UIControlEventTouchUpInside];
+            
             rightButton.tag = rightTag;
             if(rightTag == 0)
             {
@@ -764,123 +814,35 @@
             rightTag++;
             
             rightButton.frame = frame;
+            padlockButton.frame = frame;
             UIImageView *buttonImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:hair]];
             buttonImageView.frame = frame;
             [self.eyeScrollView addSubview:buttonImageView];
-            [self.eyeScrollView addSubview:rightButton];
-            [rightEyeButtons addObject:rightButton];
+//            [self.eyeScrollView addSubview:rightButton];
+//            [rightEyeButtons addObject:rightButton];
+            [self drawPadlock:padlockButton orSelectedButton:rightButton onScrollView:eyeScrollView overImageWithString:hair andButtonCounter:rightTag andAddToArray:rightEyeButtons withSelectedButtonString:[NSString stringWithFormat:@"righteye%i.png",rightTag+1]];
         }
         page++;
 
 
     }
-//    tag = 0;
-//    for (NSString *hair in RIGHTEYE_PARTS) {
-//        aButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//        [aButton addTarget:self action:@selector(rightEyeButtonsSelected:) forControlEvents:UIControlEventTouchUpInside];
-//        aButton.tag = tag;
-//        tag++;
-//        if ([hair isEqualToString:@"righteye1.png"])
-//        {
-//            [aButton setBackgroundImage:SELECTED_IMAGE forState:UIControlStateNormal];
-//            aButton.selected = TRUE;
-//        }
-//        else
-//        {
-//            [aButton setBackgroundImage:nil forState:UIControlStateNormal];
-//        }
-//        
-//        
-//        frame = CGRectMake(0, 0, buttonWidth, buttonHeight);
-//        frame.origin.x = (buttonWidth + 10) * page ;
-//        frame.origin.y = 0.0f;
-//        aButton.frame = frame;
-//        UIImageView *buttonImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:hair]];
-//        buttonImageView.frame = frame;
-//        [self.eyeScrollView addSubview:buttonImageView];
-//        [self.eyeScrollView addSubview:aButton];
-//        page++;
-//        [rightEyeButtons addObject:aButton];
-//    }
+
     int numberOfButtons = [leftEyeButtons count]+[rightEyeButtons count];
     self.eyeScrollView.contentSize = CGSizeMake((buttonHeight + 10) * numberOfButtons, pagesScrollViewSize.height);
     [self.eyeScrollView setShowsHorizontalScrollIndicator:NO];
     
     
     
-//    leftEyeButtons = [[NSMutableArray alloc]init];
-//    rightEyeButtons = [[NSMutableArray alloc]init];
-//    UIButton *aButton;
-//    // Set up the content size of the scroll view
-//    CGSize pagesScrollViewSize = self.eyeScrollView.frame.size;
-//    int buttonHeight = pagesScrollViewSize.height;
-//    int buttonWidth = pagesScrollViewSize.height;
-//    
-//    //Set up eye scroll view
-//    int tag = 0;
-//    int page = 0;
-//    CGRect frame;
-//    for (NSString *leftEye in LEFTEYE_PARTS) {
-//        aButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//        [aButton addTarget:self action:@selector(leftEyeButtonsSelected:) forControlEvents:UIControlEventTouchUpInside];
-//        aButton.tag = tag;
-//        tag++;
-//        if ([leftEye isEqualToString:@"lefteye1.png"])
-//        {
-//            [aButton setBackgroundImage:SELECTED_IMAGE forState:UIControlStateNormal];
-//            aButton.selected = TRUE;
-//        }
-//        else
-//        {
-//            [aButton setBackgroundImage:nil forState:UIControlStateNormal];
-//        }
-//        
-//        frame.origin.x = (buttonWidth + 10) * page ;
-//        frame.origin.y = 0.0f;
-//        aButton.frame = frame;
-//        UIImageView *buttonImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:leftEye]];
-//        buttonImageView.frame = frame;
-//        [self.eyeScrollView addSubview:buttonImageView];
-//        [self.eyeScrollView addSubview:aButton];
-//        page ++;
-//        [leftEyeButtons addObject:aButton];
-//    }
-//    
-//    tag = 0;
-//    for (NSString *righteye in RIGHTEYE_PARTS) {
-//        aButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//        [aButton addTarget:self action:@selector(rightEyeButtonsSelected:) forControlEvents:UIControlEventTouchUpInside];
-//        aButton.tag = tag;
-//        tag++;
-//        if ([righteye isEqualToString:@"righteye1.png"])
-//        {
-//            [aButton setBackgroundImage:SELECTED_IMAGE forState:UIControlStateNormal];
-//            aButton.selected = TRUE;
-//        }
-//        else
-//        {
-//            [aButton setBackgroundImage:[UIImage imageNamed:nil] forState:UIControlStateNormal];
-//        }
-//        
-//        frame.origin.x = (buttonWidth + 10) * page ;
-//        frame.origin.y = 0.0f;
-//        aButton.frame = frame;
-//        UIImageView *buttonImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:righteye]];
-//        buttonImageView.frame = frame;
-//        [self.eyeScrollView addSubview:buttonImageView];
-//        [self.eyeScrollView addSubview:aButton];
-//        page ++;
-//        [rightEyeButtons addObject:aButton];
-//    }
-//    
-//    int numberOfButtons = [rightEyeButtons count] + [leftEyeButtons count];
-//    self.eyeScrollView.contentSize = CGSizeMake((buttonHeight + 10) * numberOfButtons, pagesScrollViewSize.height);
-//    [self.eyeScrollView setShowsHorizontalScrollIndicator:NO];
+
 }
 
 -(void)loadScarScrollView{
     scarButtons = [[NSMutableArray alloc]init];
     UIButton *aButton;
+    
+    UIButton *padlockButton;
+
+    
     // Set up the content size of the scroll view
     CGSize pagesScrollViewSize = self.scarScrollView.frame.size;
     int buttonHeight = pagesScrollViewSize.height;
@@ -892,6 +854,10 @@
     for (NSString *scar in SCAR_PARTS) {
         aButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [aButton addTarget:self action:@selector(scarButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
+        
+        padlockButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [padlockButton addTarget:self action:@selector(AdFreePurchase:) forControlEvents:UIControlEventTouchUpInside];
+        
         aButton.tag = tag;
         tag++;
         if ([scar isEqualToString:@"scar1.png"])
@@ -909,12 +875,15 @@
         frame.origin.x = (buttonWidth + 10) * page ;
         frame.origin.y = 0.0f;
         aButton.frame = frame;
+        padlockButton.frame = frame;
         UIImageView *buttonImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:scar]];
         buttonImageView.frame = frame;
-        [self.scarScrollView addSubview:buttonImageView];
-        [self.scarScrollView addSubview:aButton];
         page++;
-        [scarButtons addObject:aButton];
+        [self.scarScrollView addSubview:buttonImageView];
+        
+//        [self.scarScrollView addSubview:aButton];
+//        [scarButtons addObject:aButton];
+        [self drawPadlock:padlockButton orSelectedButton:aButton onScrollView:scarScrollView overImageWithString:scar andButtonCounter:tag andAddToArray:scarButtons withSelectedButtonString:@"scar1.png"];
     }
     int numberOfButtons = [scarButtons count];
     self.scarScrollView.contentSize = CGSizeMake((buttonHeight + 10) * numberOfButtons, pagesScrollViewSize.height);
@@ -924,8 +893,16 @@
 #pragma mark - Hair BUtton Action method
 - (IBAction)mouthButtonSelected:(id)sender{
     
+    int numberOfButtonsToReset;
+    //only reset all the buttons if we have purchased pack, else jsut reset the first 2 and leave others alone
+    if([self IAPItemPurchased]){
+        numberOfButtonsToReset = [mouthButtons count];
+    }
+    else
+        numberOfButtonsToReset = NUM_FREE_FEATURES;
+    
     //reset buttons to normal state
-    for (int i = 0;i<[mouthButtons count];i++)
+    for (int i = 0;i<numberOfButtonsToReset;i++)
     {
         UIButton *testB = [mouthButtons objectAtIndex:i];
         //Make sure previous button that was selected is now set to not selected
@@ -933,17 +910,15 @@
             testB.selected = FALSE;
 
         [testB setBackgroundImage:nil forState:UIControlStateNormal];
+
     }
     
     UIButton *button = (UIButton *)sender;
-    
+
     if(button.selected)
     {
-        //[[hairButtons objectAtIndex:[sender tag]] setBackgroundImage:[UIImage imageNamed:[HAIR_PARTS objectAtIndex:[sender tag]]] forState:UIControlStateNormal];
         [[mouthButtons objectAtIndex:[sender tag]] setBackgroundImage:nil forState:UIControlStateNormal];
         button.selected = FALSE;
-
-    
     }
     else
     {
@@ -957,9 +932,17 @@
 
 #pragma mark - Hair BUtton Action method
 - (IBAction)leftEyeButtonsSelected:(id)sender{
+
+    int numberOfButtonsToReset;
+    //only reset all the buttons if we have purchased pack, else jsut reset the first 2 and leave others alone
+    if([self IAPItemPurchased]){
+        numberOfButtonsToReset = [leftEyeButtons count];
+    }
+    else
+        numberOfButtonsToReset = NUM_FREE_FEATURES;
     
     //reset buttons to normal state
-    for (int i = 0;i<[leftEyeButtons count];i++)
+    for (int i = 0;i<numberOfButtonsToReset;i++)
     {
         UIButton *testB = [leftEyeButtons objectAtIndex:i];
         //Make sure previous button that was selected is now set to not selected
@@ -992,8 +975,16 @@
 #pragma mark - Hair BUtton Action method
 - (IBAction)rightEyeButtonsSelected:(id)sender{
     
+    int numberOfButtonsToReset;
+    //only reset all the buttons if we have purchased pack, else jsut reset the first 2 and leave others alone
+    if([self IAPItemPurchased]){
+        numberOfButtonsToReset = [rightEyeButtons count];
+    }
+    else
+        numberOfButtonsToReset = NUM_FREE_FEATURES;
+    
     //reset buttons to normal state
-    for (int i = 0;i<[rightEyeButtons count];i++)
+    for (int i = 0;i<numberOfButtonsToReset;i++)
     {
         UIButton *testB = [rightEyeButtons objectAtIndex:i];
         //Make sure previous button that was selected is now set to not selected
@@ -1024,8 +1015,16 @@
 #pragma mark - Scar BUtton Action method
 - (IBAction)scarButtonSelected:(id)sender{
     
+    int numberOfButtonsToReset;
+    //only reset all the buttons if we have purchased pack, else jsut reset the first 2 and leave others alone
+    if([self IAPItemPurchased]){
+        numberOfButtonsToReset = [scarButtons count];
+    }
+    else
+        numberOfButtonsToReset = NUM_FREE_FEATURES;
+    
     //reset buttons to normal state
-    for (int i = 0;i<[scarButtons count];i++)
+    for (int i = 0;i<numberOfButtonsToReset;i++)
     {
         UIButton *testB = [scarButtons objectAtIndex:i];
         //Make sure previous button that was selected is now set to not selected
@@ -1196,6 +1195,7 @@
         [faceFeatureParam.featureImageView removeFromSuperview];
         [self.view addSubview:facePart.featureImageView];
         faceFeatureParam.isShown = TRUE;
+        facePart.isShown = TRUE;
     }
 //    else
 //    {
@@ -1278,6 +1278,7 @@
     return YES;
 }
 
+#pragma mark Inapp purchase
 - (IBAction)AdFreePurchase:(id)sender {
     //InAppPurchaseManager *purchase = [[InAppPurchaseManager alloc]initPrivate];
     //[self buyButtonTapped:sender];
@@ -1304,13 +1305,13 @@
 
 
 - (void)buyButtonTapped{
-    //[product purchase];
+    [product purchase];
     
     //for testing
     //NSString *title = @"Purchased";
     //[self.adFree setTitle:title forState:UIControlStateNormal];
-    NSError *error = nil;
-    [SFHFKeychainUtils storeUsername:KEY_CHAIN_USERNAME andPassword:KEY_CHAIN_PASSWORD forServiceName:KEY_SERVICE_NAME updateExisting:YES error:&error];
+//    NSError *error = nil;
+//    [SFHFKeychainUtils storeUsername:KEY_CHAIN_USERNAME andPassword:KEY_CHAIN_PASSWORD forServiceName:KEY_SERVICE_NAME updateExisting:YES error:&error];
     
     
 }
@@ -1350,11 +1351,25 @@
         title = @"Purchased";
         NSError *error = nil;
         [SFHFKeychainUtils storeUsername:KEY_CHAIN_USERNAME andPassword:KEY_CHAIN_PASSWORD forServiceName:KEY_SERVICE_NAME updateExisting:YES error:&error];
+
+        [self removeAllButtons:mouthButtons];
+        [self removeAllButtons:leftEyeButtons];
+        [self removeAllButtons:rightEyeButtons];
+        [self removeAllButtons:scarButtons];
+
+        [self loadMouthScrollView];
+        [self loadEyeScrollView];
+        [self loadScarScrollView];
         
     }
     else if (self.product.isReadyForSale) {
         title = self.product.price;
         enabled = YES;
+    }
+    else if(self.product.isRestored)
+    {
+        NSError *error = nil;
+        [SFHFKeychainUtils storeUsername:KEY_CHAIN_USERNAME andPassword:KEY_CHAIN_PASSWORD forServiceName:KEY_SERVICE_NAME updateExisting:YES error:&error];
     }
     
 //    [self.adFree setEnabled:enabled];
@@ -1370,10 +1385,15 @@
         return FALSE;
 }
 
-
-
-
-
+-(void)removeAllButtons:(NSArray*)buttonsOnScrollView{
+    //reset buttons to normal state
+    for (int i = 0;i<[buttonsOnScrollView count];i++)
+    {
+        UIButton *testB = [buttonsOnScrollView objectAtIndex:i];
+        [testB removeFromSuperview];
+        //            [testB setBackgroundImage:nil forState:UIControlStateNormal];
+    }
+}
 
 - (void)viewDidUnload {
 //    [self setRotation:nil];

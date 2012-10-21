@@ -16,6 +16,7 @@
 @synthesize backButton;
 @synthesize text1;
 @synthesize text2,secondaryView,label,textView1,textView2;
+@synthesize restoreLabel,restore,product;
 
 //- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 //{
@@ -35,9 +36,18 @@
     //text2.font = [UIFont fontWithName:FONT_TYPE size:15];
     label.text = @"BACK";
     label.font = [UIFont fontWithName:FONT_TYPE size:20];
+    
+    restoreLabel.text = @"Restore Purchases";
+    restoreLabel.numberOfLines = 2;
+    restoreLabel.font = [UIFont fontWithName:FONT_TYPE size:12];
+    
+    //setup the product, and register as an observer, so we can restore purchases
+    self.product = [[IAPStoreManager sharedInstance] productForIdentifier:kInAppPurchaseProductID];
+    [self.product addObserver:self];
+
 	// Do any additional setup after loading the view.
     
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:productPurchase]) {
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:kInAppPurchaseProductID]) {
         // Create a view of the standard size at the bottom of the screen.
         // Available AdSize constants are explained in GADAdSize.h.
         bannerView_ = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
@@ -82,5 +92,67 @@
     
     [self.navigationController popViewControllerAnimated:YES];
     [UIView commitAnimations];
+}
+
+
+- (IBAction)restorePreviousTransaction:(id)sender {
+    //[self.product restorePurchase];
+    //if([self IAPItemPurchased])
+    if(self.product.isRestored)
+    {
+        UIAlertView *restorePopup = [[UIAlertView alloc]
+                                initWithTitle:@"Restored"
+                                message:@"Previous Purchases have been restored"
+                                delegate:nil
+                                cancelButtonTitle:@"OK"
+                                otherButtonTitles:nil];
+        [restorePopup show];
+        
+
+    }
+    else
+    {
+//        UIAlertView *restorePopup = [[UIAlertView alloc]
+//                                     initWithTitle:@"Not Restored"
+//                                     message:@"You have not purchased the ZombiePack so no previous purchases can be restored"
+//                                     delegate:nil
+//                                     cancelButtonTitle:@"OK"
+//                                     otherButtonTitles:nil];
+//        [restorePopup show];
+        [self.product restorePurchase];
+    }
+}
+
+- (void)iapProductWasUpdated:(IAPProduct*)iapProduct {
+    if(self.product.isRestored)
+    {
+        NSError *error = nil;
+        [SFHFKeychainUtils storeUsername:KEY_CHAIN_USERNAME andPassword:KEY_CHAIN_PASSWORD forServiceName:KEY_SERVICE_NAME updateExisting:YES error:&error];
+        UIAlertView *restorePopup = [[UIAlertView alloc]
+                                     initWithTitle:@"Restored"
+                                     message:@"Previous Purchases have been restored"
+                                     delegate:nil
+                                     cancelButtonTitle:@"OK"
+                                     otherButtonTitles:nil];
+        [restorePopup show];
+    }
+    else if(!product.isRestored){
+        UIAlertView *restorePopup = [[UIAlertView alloc]
+                                initWithTitle:@"Not Restored"
+                                message:@"You have not purchased the ZombiePack so no previous purchases can be restored"
+                                delegate:nil
+                                cancelButtonTitle:@"OK"
+                                otherButtonTitles:nil];
+        [restorePopup show];
+    }
+}
+
+-(BOOL)IAPItemPurchased {
+    NSError *error = nil;
+    NSString *password = [SFHFKeychainUtils getPasswordForUsername:KEY_CHAIN_USERNAME andServiceName:KEY_SERVICE_NAME error:&error];
+    if ([password isEqualToString:KEY_CHAIN_PASSWORD])
+        return TRUE;
+    else
+        return FALSE;
 }
 @end

@@ -28,7 +28,7 @@
 {
     [super viewDidLoad];
     
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:productPurchase]) {
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:kInAppPurchaseProductID]) {
         // Create a view of the standard size at the bottom of the screen.
         // Available AdSize constants are explained in GADAdSize.h.
         bannerView_ = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
@@ -51,7 +51,7 @@
     arrayOfImagePaths = [[NSArray alloc]initWithArray:[SaveImage getListOfPNGsInDocDirectory]];
     NSLog(@"%i",[arrayOfImagePaths count]);
     
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:productPurchase]) {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:kInAppPurchaseProductID]) {
         self.table = [[UITableView alloc] initWithFrame:CGRectMake(0.0f,0.0f, 320, IMG_HEIGHT_NO_ADS) style:UITableViewStylePlain];
     }
     else {
@@ -64,7 +64,7 @@
     
     
     //intialise toolbar
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:productPurchase]) {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:kInAppPurchaseProductID]) {
         toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0f,IMG_HEIGHT_NO_ADS, 320, 44)];
     }
     else {

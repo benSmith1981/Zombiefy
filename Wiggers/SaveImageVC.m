@@ -35,7 +35,7 @@
     // Available AdSize constants are explained in GADAdSize.h.
     bannerView_ = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
     NSLog(@"height %f width %f",bannerView_.frame.size.height,bannerView_.frame.size.width);
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:productPurchase]) {
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:kInAppPurchaseProductID]) {
         bannerView_.frame = CGRectMake(0, 430, 320, 50);
         // Specify the ad's "unit identifier." This is your AdMob Publisher ID.
         bannerView_.adUnitID = @"a15048c13360bc3";
@@ -50,7 +50,7 @@
     }
 
     
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:productPurchase]) {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:kInAppPurchaseProductID]) {
         savedImageView.frame = CGRectMake(0, 0, 320, IMG_HEIGHT_NO_ADS);
     }
     else {
@@ -60,7 +60,7 @@
     [self.view addSubview:savedImageView];
     
     //intialise toolbar
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:productPurchase]) {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:kInAppPurchaseProductID]) {
         toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0f,IMG_HEIGHT_NO_ADS, 320, 44)];
     }
     else {

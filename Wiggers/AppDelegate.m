@@ -25,11 +25,7 @@
 {
     [TestFlight takeOff:@"7e8051c2a51aca626c6c3d07e6bf5b4d_MTQ0MTk0MjAxMi0xMC0xNiAxOTo0MTo1OS4wMzY5NTE"];
     
-    BOOL productPurchased = [[NSUserDefaults standardUserDefaults] boolForKey:productPurchase];
-    if (productPurchased) {
-        NSLog(@"purchased no ad version");
-    }
-    
+
     DefaultSHKConfigurator *configurator = [[MySHKConfigurator alloc] init];
     [SHKConfiguration sharedInstanceWithConfigurator:configurator];
     
@@ -44,6 +40,8 @@
 //        self.viewController = [[MainScreenVC alloc] initWithNibName:@"MainScreenVC_iPad" bundle:nil];
 //    }
     //[self logInstalledFonts];
+    [[IAPStoreManager sharedInstance] autoUpdate];
+
     self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
     return YES;

@@ -115,7 +115,7 @@
 - (UIImage*)dumpOverlayViewToImage {
     CGSize imageSize;
 	//CGSize imageSize = overlayImage.bounds.size;
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:productPurchase]) {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:kInAppPurchaseProductID]) {
         imageSize = CGSizeMake(IMG_WIDTH_NO_ADS, IMG_HEIGHT_NO_ADS);
     }   
     else {
@@ -134,7 +134,7 @@
  */
 - (UIImage*)addOverlayToBaseImage:(UIImage*)baseImage {
     UIImage* result;
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:productPurchase]) {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:kInAppPurchaseProductID]) {
         UIImage *overlayImageLocal = [self dumpOverlayViewToImage];	
         CGPoint topCorner = CGPointMake(0, 0);
         CGSize targetSize = CGSizeMake(IMG_WIDTH_NO_ADS, IMG_HEIGHT_NO_ADS);	

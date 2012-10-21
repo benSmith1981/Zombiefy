@@ -169,7 +169,7 @@
 -(void)setImageWithImageViews:(NSMutableArray*)faceFeatures{
     UIImage *faceImage = activeImageView.image;
 
-    UILabel *wiggofy = [[UILabel alloc]initWithFrame:CGRectMake(10,5,145,37)];
+    UILabel *wiggofy = [[UILabel alloc]initWithFrame:CGRectMake(10,5,155,37)];
     wiggofy = [self drawText:@"@Zzombiefy" InUILabel:wiggofy withFrame:wiggofy.frame colour:[UIColor whiteColor] ofFontType:[UIFont fontWithName:FONT_TYPE size:25]];
 
     UIGraphicsBeginImageContextWithOptions(faceImage.size, YES, 0);
@@ -198,9 +198,9 @@
     [activeImageView addSubview:wiggofy];
     
     //render it into the activeImageView then we can post or whatever
-//    [activeImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
-//    activeImageView.image = UIGraphicsGetImageFromCurrentImageContext();
-//    UIGraphicsEndImageContext();
+    [activeImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    activeImageView.image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
     activeImageView.image = [self dumpOverlayViewToImage];//]:activeImageView];
     activeFacePart = nil;
     
@@ -324,7 +324,7 @@
  */
 - (UIImage*)addOverlayToBaseImage:(UIImage*)baseImage {
     UIImage* result;
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:productPurchase]) {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:kInAppPurchaseProductID]) {
         UIImage *overlayImageLocal = [self dumpOverlayViewToImage];
         CGPoint topCorner = CGPointMake(_firstX, _firstY);
         
