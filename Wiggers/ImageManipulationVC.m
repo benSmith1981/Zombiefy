@@ -334,7 +334,16 @@
 
         [self.navigationController popViewControllerAnimated:YES];
         //Test flight build purposes only
-        //[TestFlight openFeedbackView];
+        #warning Comment out before building for appstore!!
+//        [TestFlight openFeedbackView];
+//        UIAlertView *restorePopup = [[UIAlertView alloc]
+//                                     initWithTitle:@"Please Enter feedback"
+//                                     message:@"Did you love or hate the app? What is/isn't good about it? Your feedback is extremely important to me, and I would appreciate your time in letting me know. Once you have finished writing please press submit, and it will be sent to me, as if by magic!! Thanks"
+//                                     delegate:nil
+//                                     cancelButtonTitle:@"OK"
+//                                     otherButtonTitles:nil];
+//        [restorePopup show];
+
     }
     //Done
     else if (button.tag == 4){

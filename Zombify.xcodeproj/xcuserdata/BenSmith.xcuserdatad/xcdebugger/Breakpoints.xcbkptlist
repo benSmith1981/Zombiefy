@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Wiggers/ImageManipulationVC.m"
-         timestampString = "372626116.43466"
+         timestampString = "372630963.398013"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1320"
-         endingLineNumber = "1320"
+         startingLineNumber = "1329"
+         endingLineNumber = "1329"
          landmarkName = "-buyButtonTapped"
          landmarkType = "5">
       </FileBreakpoint>
@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Wiggers/ImageManipulationVC.m"
-         timestampString = "372626116.43466"
+         timestampString = "372630963.398013"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1321"
-         endingLineNumber = "1321"
+         startingLineNumber = "1330"
+         endingLineNumber = "1330"
          landmarkName = "-buyButtonTapped"
          landmarkType = "5">
       </FileBreakpoint>
@@ -34,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Wiggers/ImageManipulationVC.m"
-         timestampString = "372626116.43466"
+         timestampString = "372630963.398013"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1317"
-         endingLineNumber = "1317"
+         startingLineNumber = "1326"
+         endingLineNumber = "1326"
          landmarkName = "-buyButtonTapped"
          landmarkType = "5">
       </FileBreakpoint>
@@ -60,46 +60,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Wiggers/ImageManipulationVC.m"
-         timestampString = "372626116.43466"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1361"
-         endingLineNumber = "1361"
-         landmarkName = "-setButtonState"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Wiggers/ImageManipulationVC.m"
-         timestampString = "372626116.43466"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1364"
-         endingLineNumber = "1364"
-         landmarkName = "-setButtonState"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Wiggers/ImageManipulationVC.m"
-         timestampString = "372626116.43466"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1367"
-         endingLineNumber = "1367"
-         landmarkName = "-setButtonState"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Wiggers/ImageManipulationVC.m"
-         timestampString = "372626116.43466"
+         timestampString = "372630963.398013"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1370"
@@ -112,11 +73,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Wiggers/ImageManipulationVC.m"
-         timestampString = "372626116.43466"
+         timestampString = "372630963.398013"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1393"
-         endingLineNumber = "1393"
+         startingLineNumber = "1373"
+         endingLineNumber = "1373"
          landmarkName = "-setButtonState"
          landmarkType = "5">
       </FileBreakpoint>
@@ -125,11 +86,50 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Wiggers/ImageManipulationVC.m"
-         timestampString = "372626116.43466"
+         timestampString = "372630963.398013"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1398"
-         endingLineNumber = "1398"
+         startingLineNumber = "1376"
+         endingLineNumber = "1376"
+         landmarkName = "-setButtonState"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Wiggers/ImageManipulationVC.m"
+         timestampString = "372630963.398013"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1379"
+         endingLineNumber = "1379"
+         landmarkName = "-setButtonState"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Wiggers/ImageManipulationVC.m"
+         timestampString = "372630963.398013"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1402"
+         endingLineNumber = "1402"
+         landmarkName = "-setButtonState"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Wiggers/ImageManipulationVC.m"
+         timestampString = "372630963.398013"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1407"
+         endingLineNumber = "1407"
          landmarkName = "-setButtonState"
          landmarkType = "5">
       </FileBreakpoint>
@@ -151,11 +151,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Wiggers/ImageManipulationVC.m"
-         timestampString = "372626116.43466"
+         timestampString = "372630963.398013"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1341"
-         endingLineNumber = "1341"
+         startingLineNumber = "1350"
+         endingLineNumber = "1350"
          landmarkName = "-initProduct:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -190,11 +190,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Wiggers/ImageManipulationVC.m"
-         timestampString = "372626116.43466"
+         timestampString = "372630963.398013"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1360"
-         endingLineNumber = "1360"
+         startingLineNumber = "1369"
+         endingLineNumber = "1369"
          landmarkName = "-setButtonState"
          landmarkType = "5">
       </FileBreakpoint>
