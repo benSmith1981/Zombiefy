@@ -3,6 +3,7 @@
 #import "FSMMachine.h"
 #import "IAPCatalogue.h"
 #import "SKProduct+PriceWithCurrency.h"
+#import "Logging.h"
 
 @interface IAPProduct()
 @property (nonatomic, readwrite, strong) NSString* identifier;
@@ -228,22 +229,31 @@ const NSString* kEventRestoreEnded = @"RestoreEnded";
 }
 
 - (void)addObserver:(id<IAPProductObserver>)iapProductObserver {
-    [self.observers addObject:[NSValue valueWithNonretainedObject:iapProductObserver]];
+    //[self.observers addObject:[NSValue valueWithNonretainedObject:iapProductObserver]];
+    [self.observers addObject:iapProductObserver];
     [self cleanEmptyObservers];
 }
 
 - (void)removeObserver:(id<IAPProductObserver>)iapProductObserver {
-    [self.observers removeObject:[NSValue valueWithNonretainedObject:iapProductObserver]];
+    //[self.observers removeObject:[NSValue valueWithNonretainedObject:iapProductObserver]];
+    [self.observers removeObject:iapProductObserver];
     [self cleanEmptyObservers];
 }
 
 - (void)notifyObserversOfStateChange {
-    for (NSValue* observer in self.observers) {
-        id<IAPProductObserver> iapProductObserver = [observer nonretainedObjectValue];
-        if (iapProductObserver && [iapProductObserver respondsToSelector:@selector(iapProductWasUpdated:)]) {
-            [iapProductObserver iapProductWasUpdated:self];
+    for (id<IAPProductObserver> observer in self.observers) {
+        //id<IAPProductObserver> iapProductObserver = observer;
+        if (observer && [observer respondsToSelector:@selector(iapProductWasUpdated:)]) {
+            [observer iapProductWasUpdated:self];
         }
     }
+    
+//    for (NSValue* observer in self.observers) {
+//        id<IAPProductObserver> iapProductObserver = observer;
+//        if (iapProductObserver && [iapProductObserver respondsToSelector:@selector(iapProductWasUpdated:)]) {
+//            [iapProductObserver iapProductWasUpdated:self];
+//        }
+//    }
     
     [self cleanEmptyObservers];
 }
@@ -251,12 +261,17 @@ const NSString* kEventRestoreEnded = @"RestoreEnded";
 - (void)cleanEmptyObservers {
     NSMutableArray* toDelete = [NSMutableArray array];
     
-    for (NSValue* observer in self.observers) {
-        if (![observer nonretainedObjectValue]) {
+//    for (id observer in self.observers) {
+//        if (![observer nonretainedObjectValue]) {
+//            [toDelete addObject:observer];
+//        }
+//    }
+    
+    for (id<IAPProductObserver> observer in self.observers) {
+        if (!observer) {
             [toDelete addObject:observer];
         }
     }
-    
     [self.observers removeObjectsInArray:toDelete];
 }
 

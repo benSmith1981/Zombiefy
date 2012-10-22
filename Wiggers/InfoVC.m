@@ -31,6 +31,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    //setup the product, and register as an observer, so we can restore purchases
+    self.product = [[IAPStoreManager sharedInstance] productForIdentifier:kInAppPurchaseProductID];
+    [self.product addObserver:self];
+    
+    
     [text1 setFont:[UIFont fontWithName:FONT_TYPE size:15]];
     text1.textColor = [UIColor blackColor];
     //text2.font = [UIFont fontWithName:FONT_TYPE size:15];
@@ -41,13 +46,10 @@
     restoreLabel.numberOfLines = 2;
     restoreLabel.font = [UIFont fontWithName:FONT_TYPE size:12];
     
-    //setup the product, and register as an observer, so we can restore purchases
-    self.product = [[IAPStoreManager sharedInstance] productForIdentifier:kInAppPurchaseProductID];
-    [self.product addObserver:self];
 
 	// Do any additional setup after loading the view.
     
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:kInAppPurchaseProductID]) {
+    //if (![[NSUserDefaults standardUserDefaults] boolForKey:kInAppPurchaseProductID]) {
         // Create a view of the standard size at the bottom of the screen.
         // Available AdSize constants are explained in GADAdSize.h.
         bannerView_ = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
@@ -63,7 +65,7 @@
         
         // Initiate a generic request to load it with an ad.
         [bannerView_ loadRequest:[GADRequest request]];
-    }
+    //}
 }
 
 - (void)viewDidUnload
@@ -83,6 +85,8 @@
 }
 
 - (IBAction)buttonPressed:(id)sender {
+    [self.product removeObserver:self];
+
     [UIView beginAnimations:@"View Flip" context:nil];
     [UIView setAnimationDuration:0.80];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
@@ -92,13 +96,17 @@
     
     [self.navigationController popViewControllerAnimated:YES];
     [UIView commitAnimations];
+    
 }
 
 
 - (IBAction)restorePreviousTransaction:(id)sender {
     //[self.product restorePurchase];
     //if([self IAPItemPurchased])
-    if(self.product.isRestored)
+    
+
+
+    if(self.product.isRestored || [self IAPItemPurchased])
     {
         UIAlertView *restorePopup = [[UIAlertView alloc]
                                 initWithTitle:@"Restored"
@@ -124,7 +132,14 @@
 }
 
 - (void)iapProductWasUpdated:(IAPProduct*)iapProduct {
-    if(self.product.isRestored)
+ 
+    if (self.product.isLoading) {
+//        title = @"Loading...";
+    }
+    else if (self.product.isPurchasing) {
+//        title = @"Purchasing...";
+    }
+    else if (self.product.isPurchased) 
     {
         NSError *error = nil;
         [SFHFKeychainUtils storeUsername:KEY_CHAIN_USERNAME andPassword:KEY_CHAIN_PASSWORD forServiceName:KEY_SERVICE_NAME updateExisting:YES error:&error];
@@ -136,15 +151,25 @@
                                      otherButtonTitles:nil];
         [restorePopup show];
     }
-    else if(!product.isRestored){
-        UIAlertView *restorePopup = [[UIAlertView alloc]
-                                initWithTitle:@"Not Restored"
-                                message:@"You have not purchased the ZombiePack so no previous purchases can be restored"
-                                delegate:nil
-                                cancelButtonTitle:@"OK"
-                                otherButtonTitles:nil];
-        [restorePopup show];
+    //else if(!product.isRestored && !product.isRestoring){
+    else if (product.isError)
+    {
+
     }
+    else if(!product.isRestored && !product.isRestoring)
+    {
+
+        NSLog(@"Product not restored");
+        UIAlertView *restorePopup = [[UIAlertView alloc]
+                                     initWithTitle:@"Not Restored"
+                                     message:@"The ZombiePack Product has not been restored"
+                                     delegate:nil
+                                     cancelButtonTitle:@"OK"
+                                     otherButtonTitles:nil];
+        [restorePopup show];
+        
+    }
+
 }
 
 -(BOOL)IAPItemPurchased {

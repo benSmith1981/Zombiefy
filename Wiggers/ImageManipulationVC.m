@@ -34,7 +34,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
 
-        [self initProduct:kInAppPurchaseProductID];
         //intialise toolbar
         if ([[NSUserDefaults standardUserDefaults] boolForKey:kInAppPurchaseProductID]) {
             toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(TOOLBAR_X_POSITION_NO_ADS, TOOLBAR_Y_POSITION_NO_ADS, TOOLBAR_WIDTH, TOOLBAR_HEIGHT)];
@@ -112,7 +111,9 @@
     [loadingWheel startAnimating];
     [self showLoadingText];
     
-
+    //setup the product, and register as an observer, so we can restore purchases
+    self.product = [[IAPStoreManager sharedInstance] productForIdentifier:kInAppPurchaseProductID];
+    [self.product addObserver:self];
     
    // NSLog(@"height %f width %f",bannerView_.frame.size.height,bannerView_.frame.size.width);
     if (![[NSUserDefaults standardUserDefaults] boolForKey:kInAppPurchaseProductID]) {
@@ -328,6 +329,9 @@
     //BACK
     else if (button.tag == 3){
         self.activeImageView = nil;
+        //deregister the observer
+        [self.product removeObserver:self];
+
         [self.navigationController popViewControllerAnimated:YES];
         //Test flight build purposes only
         //[TestFlight openFeedbackView];
@@ -1282,7 +1286,8 @@
 - (IBAction)AdFreePurchase:(id)sender {
     //InAppPurchaseManager *purchase = [[InAppPurchaseManager alloc]initPrivate];
     //[self buyButtonTapped:sender];
-    
+    //[self initProduct:kInAppPurchaseProductID];
+
     if ([self IAPItemPurchased]) {
         //[self.adFree setTitle:@"Purchased" forState:UIControlStateNormal];
         
@@ -1305,7 +1310,22 @@
 
 
 - (void)buyButtonTapped{
-    [product purchase];
+//    self.product = [[IAPStoreManager sharedInstance] productForIdentifier:kInAppPurchaseProductID];
+//    [self.product addObserver:self];
+    if (self.product.isReadyForSale)
+    {
+        [product purchase];
+    }
+    else
+    {
+        UIAlertView *restorePopup = [[UIAlertView alloc]
+                                     initWithTitle:@"Seems to be a problem..."
+                                     message:@"We cannot access the appstore at this current time, so no purchase can take place"
+                                     delegate:nil
+                                     cancelButtonTitle:@"OK"
+                                     otherButtonTitles:nil];
+        [restorePopup show];
+    }
     
     //for testing
     //NSString *title = @"Purchased";
@@ -1320,7 +1340,6 @@
 - (void)initProduct:(NSString*)productIdentifier {
     self.product = [[IAPStoreManager sharedInstance] productForIdentifier:productIdentifier];
     [self.product addObserver:self];
-    
 }
 
 // If an error is encountered.
@@ -1352,6 +1371,14 @@
         NSError *error = nil;
         [SFHFKeychainUtils storeUsername:KEY_CHAIN_USERNAME andPassword:KEY_CHAIN_PASSWORD forServiceName:KEY_SERVICE_NAME updateExisting:YES error:&error];
 
+        UIAlertView *restorePopup = [[UIAlertView alloc]
+                                     initWithTitle:@"Purchase Complete"
+                                     message:@"You have now unlocked all the Zombie features! Enjoy!"
+                                     delegate:nil
+                                     cancelButtonTitle:@"OK"
+                                     otherButtonTitles:nil];
+        [restorePopup show];
+        
         [self removeAllButtons:mouthButtons];
         [self removeAllButtons:leftEyeButtons];
         [self removeAllButtons:rightEyeButtons];
