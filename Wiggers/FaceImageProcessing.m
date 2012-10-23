@@ -235,7 +235,7 @@
                 // Get the mouth position translated to imageView UIKit coordinates
                 CGPoint eyePos = CGPointApplyAffineTransform(f.leftEyePosition, transform);
                 //scale the mouth image size according to the dimensions of the face
-                imageView.image = [imageView.image imageByScalingProportionallyToSize:CGSizeMake(faceWidth*0.3,faceHeight*0.3)];
+                imageView.image = [imageView.image imageByScalingProportionallyToSize:CGSizeMake(faceWidth*0.4,faceHeight*0.4)];
                 //set frame of mouth image to be equal to that of the image, but adjust the x and y coords slightly as they are offset by scaling of the image
                 imageView.frame = CGRectMake(eyePos.x-imageView.image.size.width/2,eyePos.y-imageView.image.size.width/2,imageView.image.size.width, imageView.image.size.height );
                 //set the newFaceFeature objects type
@@ -250,7 +250,7 @@
             if(f.hasRightEyePosition){
                 // Get the mouth position translated to imageView UIKit coordinates
                 CGPoint eyePos = CGPointApplyAffineTransform(f.rightEyePosition, transform);
-                imageView.image = [imageView.image imageByScalingProportionallyToSize:CGSizeMake(faceWidth*0.3,faceHeight*0.3)];
+                imageView.image = [imageView.image imageByScalingProportionallyToSize:CGSizeMake(faceWidth*0.4,faceHeight*0.4)];
                 imageView.frame = CGRectMake(eyePos.x-imageView.image.size.width/2,eyePos.y-imageView.image.size.width/2,imageView.image.size.width, imageView.image.size.height );
                 [newFaceFeature setType:featureType];
                 newFaceFeature.featureImageView = imageView;
@@ -262,7 +262,7 @@
                 // Get the mouth position translated to imageView UIKit coordinates
                 CGPoint mouthPos = CGPointApplyAffineTransform(f.mouthPosition, transform);
                                 
-                imageView.image = [imageView.image imageByScalingProportionallyToSize:CGSizeMake(faceWidth*0.5,faceHeight*0.5)];
+                imageView.image = [imageView.image imageByScalingProportionallyToSize:CGSizeMake(faceWidth*0.6,faceHeight*0.6)];
                 imageView.frame = CGRectMake(mouthPos.x-imageView.image.size.width/2,mouthPos.y-imageView.image.size.height/2,imageView.image.size.width, imageView.image.size.height );
                 [newFaceFeature setType:featureType];
                 newFaceFeature.featureImageView = imageView;
