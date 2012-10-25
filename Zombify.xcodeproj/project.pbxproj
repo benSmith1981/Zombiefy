@@ -117,6 +117,8 @@
 		BE24843115F0DB9A00219F13 /* MainScreenVC_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE24842F15F0DB9A00219F13 /* MainScreenVC_iPhone.xib */; };
 		BE24843415F0DB9A00219F13 /* MainScreenVC_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE24843215F0DB9A00219F13 /* MainScreenVC_iPad.xib */; };
 		BE24843E15F0DC6900219F13 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE24843D15F0DC6900219F13 /* CoreImage.framework */; };
+		C7CEF55A16396DA000C4B90C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7CEF55916396DA000C4B90C /* Default-568h@2x.png */; };
+		C7CEF55D163972D100C4B90C /* GADBannerView+SetFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CEF55C163972D100C4B90C /* GADBannerView+SetFrame.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -530,6 +532,9 @@
 		BE24843015F0DB9A00219F13 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainScreenVC_iPhone.xib; sourceTree = "<group>"; };
 		BE24843315F0DB9A00219F13 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainScreenVC_iPad.xib; sourceTree = "<group>"; };
 		BE24843D15F0DC6900219F13 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		C7CEF55916396DA000C4B90C /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		C7CEF55B163972D100C4B90C /* GADBannerView+SetFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GADBannerView+SetFrame.h"; sourceTree = "<group>"; };
+		C7CEF55C163972D100C4B90C /* GADBannerView+SetFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GADBannerView+SetFrame.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -768,6 +773,7 @@
 		BE24840B15F0DB9900219F13 = {
 			isa = PBXGroup;
 			children = (
+				C7CEF55916396DA000C4B90C /* Default-568h@2x.png */,
 				90FED2B11635DDEA007AA03A /* Default@2x.png */,
 				90FED2AF1635DDE4007AA03A /* Default.png */,
 				901BF62E162740DA0019E89C /* 57x57.png */,
@@ -852,6 +858,8 @@
 				909F35A415FBD420005FB900 /* SaveImageVC.h */,
 				909F35A515FBD421005FB900 /* SaveImageVC.m */,
 				BE24842115F0DB9A00219F13 /* Supporting Files */,
+				C7CEF55B163972D100C4B90C /* GADBannerView+SetFrame.h */,
+				C7CEF55C163972D100C4B90C /* GADBannerView+SetFrame.m */,
 			);
 			path = Wiggers;
 			sourceTree = "<group>";
@@ -1254,6 +1262,7 @@
 				90FED2B01635DDE4007AA03A /* Default.png in Resources */,
 				90FED2B21635DDEA007AA03A /* Default@2x.png in Resources */,
 				90FED2B41635DE02007AA03A /* background.png in Resources */,
+				C7CEF55A16396DA000C4B90C /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1287,6 +1296,7 @@
 				90CD40AC1631B34B00B47E03 /* IAPProduct.m in Sources */,
 				90CD40AE1631B35200B47E03 /* IAPCatalogue.m in Sources */,
 				90CD40AF1631B35400B47E03 /* FSMMachine.m in Sources */,
+				C7CEF55D163972D100C4B90C /* GADBannerView+SetFrame.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

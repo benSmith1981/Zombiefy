@@ -9,6 +9,8 @@
 #import "RecentImagesTableView.h"
 #import "SHK.h"
 #import "Constants.h"
+#import "GADBannerView+SetFrame.h"
+
 @interface RecentImagesTableView ()
 
 @end
@@ -33,7 +35,7 @@
         // Available AdSize constants are explained in GADAdSize.h.
         bannerView_ = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
         NSLog(@"height %f width %f",bannerView_.frame.size.height,bannerView_.frame.size.width);
-        bannerView_.frame = CGRectMake(0, 430, 320, 50);
+        [bannerView_ positionView:CGRectMake(AD_X_POSITION, AD_Y_POSITION, AD_WIDTH, AD_HEIGHT)];
         // Specify the ad's "unit identifier." This is your AdMob Publisher ID.
         bannerView_.adUnitID = @"a15048c13360bc3";
         

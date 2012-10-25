@@ -8,6 +8,7 @@
 
 #import "SaveImageVC.h"
 #import "SHK.h"
+#import "GADBannerView+SetFrame.h"
 #import "Constants.h"
 @interface SaveImageVC ()
 
@@ -36,7 +37,7 @@
     bannerView_ = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
     NSLog(@"height %f width %f",bannerView_.frame.size.height,bannerView_.frame.size.width);
     if (![[NSUserDefaults standardUserDefaults] boolForKey:kInAppPurchaseProductID]) {
-        bannerView_.frame = CGRectMake(0, 430, 320, 50);
+        [bannerView_ positionView:CGRectMake(AD_X_POSITION, AD_Y_POSITION, AD_WIDTH, AD_HEIGHT)];
         // Specify the ad's "unit identifier." This is your AdMob Publisher ID.
         bannerView_.adUnitID = @"a15048c13360bc3";
         
