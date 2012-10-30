@@ -6,7 +6,6 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-
 #define IMG_HEIGHT 386.0f
 #define IMG_WIDTH 320.0f
 #define IMG_X 0.0f
