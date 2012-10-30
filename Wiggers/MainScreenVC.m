@@ -195,6 +195,8 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     self.activeImageView = nil;
     UIImageView *imageView = [[UIImageView alloc]init];
+    
+    //TODO sort out sizing inherit from parent view all way up to window
     if ([[NSUserDefaults standardUserDefaults] boolForKey:kInAppPurchaseProductID]) {
         imageView.frame = CGRectMake(IMG_X,IMG_Y, IMG_HEIGHT_NO_ADS, IMG_HEIGHT_NO_ADS);
     }

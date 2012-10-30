@@ -202,6 +202,7 @@
     activeImageView.image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     activeImageView.image = [self dumpOverlayViewToImage];//]:activeImageView];
+    //activeImageView.image = [activeImageView.image imageWithOverlayColor:[UIColor greenColor]];
     activeFacePart = nil;
     
     
