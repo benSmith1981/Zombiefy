@@ -50,7 +50,7 @@
         saveImage =  [self customAddButtonItem:@"SAVE" WithTarget:self action:@selector(buttonPressed:) andTag:2 andTextSize:25 andTextColour:[UIColor blackColor] andButtonWidth:90.0f];
         takeNewImage =  [self customAddButtonItem:@"MAIN MENU" WithTarget:self action:@selector(buttonPressed:) andTag:3 andTextSize:15 andTextColour:[UIColor blackColor] andButtonWidth:90.0f];
         ok =  [self customAddButtonItem:@"DONE" WithTarget:self action:@selector(buttonPressed:) andTag:4 andTextSize:15 andTextColour:[UIColor redColor] andButtonWidth:70.0f];
-        mouths =  [self customAddButtonItem:@"MOUTHES" WithTarget:self action:@selector(buttonPressed:) andTag:5 andTextSize:15 andTextColour:[UIColor blackColor] andButtonWidth:70.0f];
+        mouths =  [self customAddButtonItem:@"MOUTHS" WithTarget:self action:@selector(buttonPressed:) andTag:5 andTextSize:15 andTextColour:[UIColor blackColor] andButtonWidth:70.0f];
         eyes =  [self customAddButtonItem:@"EYES" WithTarget:self action:@selector(buttonPressed:) andTag:6 andTextSize:15 andTextColour:[UIColor blackColor] andButtonWidth:70.0f];
         scars =  [self customAddButtonItem:@"SCARS" WithTarget:self action:@selector(buttonPressed:) andTag:7 andTextSize:15 andTextColour:[UIColor blackColor] andButtonWidth:70.0f];
 
@@ -321,28 +321,32 @@
     //SHARE
     else if (button.tag == 1){
         SHKItem *item = [SHKItem image:self.
-                         activeImageView.image title:@"Zombiefy, on app store now"];
+                         activeImageView.image title:@"Zombiefy, on app store now http://bit.ly/XdXZ3t"];
         SHKActionSheet *actionSheet = [SHKActionSheet actionSheetForItem:item];
         [SHK setRootViewController:self];
         [actionSheet showFromToolbar:toolBar];
     }
-    //BACK
+    //Main Menu
     else if (button.tag == 3){
-        self.activeImageView = nil;
-        //deregister the observer
-        [self.product removeObserver:self];
 
-        [self.navigationController popViewControllerAnimated:YES];
         //Test flight build purposes only
         #warning Comment out before building for appstore!!
-        [TestFlight openFeedbackView];
-        UIAlertView *restorePopup = [[UIAlertView alloc]
-                                     initWithTitle:@"Please Enter feedback"
-                                     message:@"Did you love or hate the app? What is/isn't good about it? Your feedback is extremely important to me, and I would appreciate your time in letting me know. Once you have finished writing please press submit, and it will be sent to me, as if by magic!! Thanks"
-                                     delegate:nil
-                                     cancelButtonTitle:@"OK"
-                                     otherButtonTitles:nil];
-        [restorePopup show];
+//        [TestFlight openFeedbackView];
+//        UIAlertView *restorePopup = [[UIAlertView alloc]
+//                                     initWithTitle:@"Please Enter feedback"
+//                                     message:@"Did you love or hate the app? What is/isn't good about it? Your feedback is extremely important to me, and I would appreciate your time in letting me know. Once you have finished writing please press submit, and it will be sent to me, as if by magic!! Thanks"
+//                                     delegate:nil
+//                                     cancelButtonTitle:@"OK"
+//                                     otherButtonTitles:nil];
+//        [restorePopup show];
+        
+        UIAlertView *joinFacebookPage = [[UIAlertView alloc]
+                                     initWithTitle:@"Follow us on Facebook!"
+                                     message:@"See the best photos taken with Zombiefy!!"
+                                     delegate:self
+                                     cancelButtonTitle:@"No Thanks"
+                                     otherButtonTitles:@"OK",nil];
+        [joinFacebookPage show];
 
     }
     //Done
@@ -382,7 +386,7 @@
         showMouthContainer = FALSE;
         showEyeContainer = FALSE;
         
-        [imageProcessing setImageWithImageViews:editedFaceFeatures];//View:self.activeImageView withFeatures:featuresLocalInstance OnCanvas:canvas];
+        [imageProcessing setImageWithImageViews:editedFaceFeatures];
         [canvas removeGestureRecognizer:pinchRecognizer];
         [canvas removeGestureRecognizer:tapProfileImageRecognizer];
         [canvas removeGestureRecognizer:panRecognizer];
@@ -407,15 +411,7 @@
         else
         {
             [self hideContainer:mouthScrollViewContainer withTag:mouthContainer];
-//            showMouthContainer = FALSE;
-//
-//            [UIView beginAnimations:@"showView" context:nil];
-//            [UIView setAnimationDuration:0.7];
-//            [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-//            [UIView setAnimationTransition:UIViewAnimationTransitionNone forView:mouthScrollViewContainer cache:YES];
-//            mouthScrollViewContainer.frame = CGRectMake(0.0f,toolBar.frame.origin.y, mouthScrollViewContainer.frame.size.width, mouthScrollViewContainer.frame.size.height);
-//            mouthScrollViewContainer.alpha = 0;
-//            [UIView commitAnimations];
+
         }
         
     }
@@ -431,30 +427,12 @@
                 [self hideContainer:mouthScrollViewContainer withTag:mouthContainer];
             }
             [self showContainer:eyeScrollViewContainer withTag:eyeContainer];
-//            showEyeContainer = TRUE;
-//            [self.view bringSubviewToFront:eyeScrollViewContainer];
-//            [self.view bringSubviewToFront:toolBar];
-//            eyeScrollViewContainer.hidden = NO;
-//            eyeScrollViewContainer.alpha = 1;
-//            [UIView beginAnimations:@"showView" context:nil];
-//            [UIView setAnimationDuration:0.7];
-//            [UIView setAnimationTransition:UIViewAnimationTransitionNone forView:mouthScrollViewContainer cache:YES];
-//            eyeScrollViewContainer.frame = CGRectMake(0.0f,toolBar.frame.origin.y-eyeScrollViewContainer.frame.size.height, eyeScrollViewContainer.frame.size.width, eyeScrollViewContainer.frame.size.height);
-//            
-//            [UIView commitAnimations];
+
         }
         else
         {
             [self hideContainer:eyeScrollViewContainer withTag:eyeContainer];
-//            showEyeContainer = FALSE;
-//            
-//            [UIView beginAnimations:@"showView" context:nil];
-//            [UIView setAnimationDuration:0.7];
-//            [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-//            [UIView setAnimationTransition:UIViewAnimationTransitionNone forView:eyeScrollViewContainer cache:YES];
-//            eyeScrollViewContainer.frame = CGRectMake(0.0f,toolBar.frame.origin.y, eyeScrollViewContainer.frame.size.width, eyeScrollViewContainer.frame.size.height);
-//            eyeScrollViewContainer.alpha = 0;
-//            [UIView commitAnimations];
+
         }
     }
     //Scar scroll view
@@ -469,30 +447,11 @@
             }
             [self showContainer:scarScrollViewContainer withTag:scarContainer];
 
-//            showScarContainer = TRUE;
-//            [self.view bringSubviewToFront:scarScrollViewContainer];
-//            [self.view bringSubviewToFront:toolBar];
-//            scarScrollViewContainer.hidden = NO;
-//            scarScrollViewContainer.alpha = 1;
-//            [UIView beginAnimations:@"showView" context:nil];
-//            [UIView setAnimationDuration:0.7];
-//            [UIView setAnimationTransition:UIViewAnimationTransitionNone forView:scarScrollViewContainer cache:YES];
-//            scarScrollViewContainer.frame = CGRectMake(0.0f,toolBar.frame.origin.y-scarScrollViewContainer.frame.size.height, scarScrollViewContainer.frame.size.width, scarScrollViewContainer.frame.size.height);
-//            
-//            [UIView commitAnimations];
         }
         else
         {
             [self hideContainer:scarScrollViewContainer withTag:scarContainer];
-//            showScarContainer = FALSE;
-//            
-//            [UIView beginAnimations:@"showView" context:nil];
-//            [UIView setAnimationDuration:0.7];
-//            [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-//            [UIView setAnimationTransition:UIViewAnimationTransitionNone forView:scarScrollViewContainer cache:YES];
-//            scarScrollViewContainer.frame = CGRectMake(0.0f,toolBar.frame.origin.y, scarScrollViewContainer.frame.size.width, scarScrollViewContainer.frame.size.height);
-//            scarScrollViewContainer.alpha = 0;
-//            [UIView commitAnimations];
+
         }
     }
     
@@ -599,10 +558,34 @@
         }
         
     }
+    
+    else if ([alertView.title isEqualToString:@"Follow us on Facebook!"])
+    {
+        //NO
+        if (buttonIndex == 0) {
+            self.activeImageView = nil;
+            //deregister the observer
+            [self.product removeObserver:self];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        //FACEBOOK
+        else if (buttonIndex == 1)
+        {
+            [self launchRemoteUrlForTrack:@"288981524551602"];
+
+        }
+//        //Twitter
+//        else if (buttonIndex == 2)
+//        {
+//            [self launchRemoteUrlForTrack:@"288981524551602"];
+//            
+//        }
+    }
+    
 }
 
 -(void)alertSaveBox{
-
+    
     UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Zombiefy!" message:@"Please enter your HELLISH name to save:" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Save",nil];
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
     alertTextField = [alert textFieldAtIndex:0];
@@ -610,6 +593,35 @@
     alertTextField.placeholder = @"File Name";
     [alert show];
 }
+
+#pragma mark - Launch app or website
+
+-(void)launchRemoteUrlForTrack:(NSString*)pageID
+{
+
+
+    NSString* params = [NSString stringWithFormat:@"profile/%@",pageID];
+    
+    NSString* URI = @"fb://"; // Text sent through url.
+    //NSString* URI = @"soundcloud:";
+    
+    UIApplication *ourApplication = [UIApplication sharedApplication];
+    NSString *URLEncodedText = [params stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    //Append URI with URLEncodedText
+    NSURL *ourURL = [NSURL URLWithString:[URI stringByAppendingString:URLEncodedText]];
+    
+    //if we ahve the Sound cloud app open song with this
+    if ([ourApplication canOpenURL:ourURL]) {
+        
+        [ourApplication openURL:ourURL];
+    }
+    //else open the website at the permalink obtained
+    else {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.facebook.com/pages/Zombiefy/288981524551602"]];
+        
+    }
+}
+
 
 #pragma mark - Alert View when image detection finished
 -(void)ImageDetectionFinished

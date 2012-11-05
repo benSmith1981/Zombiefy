@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>2012/11/05</key>
+    <dict>
+        <key>Title</key>
+        <string>Some notification title</string>
+        <key>Message</key>
+        <string>Some notification message</string>
+    </dict>
+    <key>2012/11/06</key>
+    <dict>
+        <key>Title</key>
+        <string>Liked this app?</string>
+        <key>Message</key>
+        <string>Try MODdofy and give yourself the MOD look!</string>
+        <key>ActionButton</key>
+        <string>Get MODdofy...</string>
+        <key>ActionURL</key>
+        <string>https://itunes.apple.com/gb/app/moddofy-yourself/id562728999</string>
+    </dict>
+    ...
+</dict>
+</plist>

@@ -462,4 +462,26 @@
     }
 }
 
+- (IBAction)facebookFanButton:(id)sender {
+    NSString* params = @"profile/288981524551602";
+    
+    NSString* URI = @"fb://"; // Text sent through url.
+    //NSString* URI = @"soundcloud:";
+    
+    UIApplication *ourApplication = [UIApplication sharedApplication];
+    NSString *URLEncodedText = [params stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    //Append URI with URLEncodedText
+    NSURL *ourURL = [NSURL URLWithString:[URI stringByAppendingString:URLEncodedText]];
+    
+    //if we ahve the Sound cloud app open song with this
+    if ([ourApplication canOpenURL:ourURL]) {
+        
+        [ourApplication openURL:ourURL];
+    }
+    //else open the website at the permalink obtained
+    else {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.facebook.com/pages/Zombiefy/288981524551602"]];
+        
+    }
+}
 @end

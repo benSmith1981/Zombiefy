@@ -58,6 +58,8 @@
 @property (nonatomic,strong) IAPProduct *product;
 
 @property (nonatomic, retain) CameraVC *cameraVC;
+- (IBAction)facebookFanButton:(id)sender;
+
 - (IBAction)Delete:(id)sender;
 
 - (IBAction)soundButtonSelected:(id)sender;

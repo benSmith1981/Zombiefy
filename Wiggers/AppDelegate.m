@@ -14,6 +14,7 @@
 #import "SHKConfiguration.h"
 #import "SHKFacebook.h"
 #import "Constants.h"
+#import "iNotify.h"
 
 @implementation AppDelegate
 
@@ -41,10 +42,18 @@
 //    }
     //[self logInstalledFonts];
     [[IAPStoreManager sharedInstance] autoUpdate];
+    
+    //configure iNotify
+    [iNotify sharedInstance].notificationsPlistURL = @"http://wigtastic.com/notifications.plist";
 
     self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
     return YES;
+}
+
++ (void)initialize
+{
+
 }
 
 - (void)logInstalledFonts

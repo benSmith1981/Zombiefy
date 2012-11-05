@@ -39,6 +39,14 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.BenSmithInc.Zombify</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>Zombify</string>
+			</array>
+		</dict>
+		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>fb309877559120170</string>

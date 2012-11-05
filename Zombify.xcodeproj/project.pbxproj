@@ -107,6 +107,9 @@
 		90FED2B01635DDE4007AA03A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 90FED2AF1635DDE4007AA03A /* Default.png */; };
 		90FED2B21635DDEA007AA03A /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90FED2B11635DDEA007AA03A /* Default@2x.png */; };
 		90FED2B41635DE02007AA03A /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 90FED2B31635DE02007AA03A /* background.png */; };
+		B5C5334A164718A7000D35C6 /* facebook_page_button.png in Resources */ = {isa = PBXBuildFile; fileRef = B5C53349164718A7000D35C6 /* facebook_page_button.png */; };
+		B5C5336016482DB5000D35C6 /* iNotify.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B5C5335D16482DB5000D35C6 /* iNotify.bundle */; };
+		B5C5336116482DB5000D35C6 /* iNotify.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C5335F16482DB5000D35C6 /* iNotify.m */; };
 		BE24841B15F0DB9A00219F13 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE24841A15F0DB9A00219F13 /* UIKit.framework */; };
 		BE24841D15F0DB9A00219F13 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE24841C15F0DB9A00219F13 /* Foundation.framework */; };
 		BE24841F15F0DB9A00219F13 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE24841E15F0DB9A00219F13 /* CoreGraphics.framework */; };
@@ -517,6 +520,10 @@
 		90FED2AF1635DDE4007AA03A /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		90FED2B11635DDEA007AA03A /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		90FED2B31635DE02007AA03A /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background.png; path = "Graphics/Non Retina/Background/background.png"; sourceTree = SOURCE_ROOT; };
+		B5C53349164718A7000D35C6 /* facebook_page_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook_page_button.png; sourceTree = "<group>"; };
+		B5C5335D16482DB5000D35C6 /* iNotify.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = iNotify.bundle; sourceTree = "<group>"; };
+		B5C5335E16482DB5000D35C6 /* iNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iNotify.h; sourceTree = "<group>"; };
+		B5C5335F16482DB5000D35C6 /* iNotify.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iNotify.m; sourceTree = "<group>"; };
 		BE24841615F0DB9A00219F13 /* Wigtastic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wigtastic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE24841A15F0DB9A00219F13 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BE24841C15F0DB9A00219F13 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -569,6 +576,7 @@
 		9013F97C15FC862D00BC8948 /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
+				B5C53349164718A7000D35C6 /* facebook_page_button.png */,
 				90CD40BA1632DC9900B47E03 /* padlock.png */,
 				901BF637162755CB0019E89C /* SoundButton.png */,
 				901BF638162755CB0019E89C /* SoundButton@2x.png */,
@@ -770,6 +778,16 @@
 			path = TestFlightSDK1.1;
 			sourceTree = "<group>";
 		};
+		B5C5335C16482DB5000D35C6 /* iNotify */ = {
+			isa = PBXGroup;
+			children = (
+				B5C5335D16482DB5000D35C6 /* iNotify.bundle */,
+				B5C5335E16482DB5000D35C6 /* iNotify.h */,
+				B5C5335F16482DB5000D35C6 /* iNotify.m */,
+			);
+			path = iNotify;
+			sourceTree = "<group>";
+		};
 		BE24840B15F0DB9900219F13 = {
 			isa = PBXGroup;
 			children = (
@@ -780,6 +798,7 @@
 				901BF62C162740D60019E89C /* 114x114.png */,
 				90272648160B892E004DB4B2 /* ShareKit.xcodeproj */,
 				905EAC85160230AD000C8264 /* libz.dylib */,
+				B5C5335C16482DB5000D35C6 /* iNotify */,
 				90302AFD160B99D300F8992C /* Admobs */,
 				90F567A4160B8FB9003B1768 /* TestFlightSDK1.1 */,
 				BE24842015F0DB9A00219F13 /* Wiggers */,
@@ -1263,6 +1282,8 @@
 				90FED2B21635DDEA007AA03A /* Default@2x.png in Resources */,
 				90FED2B41635DE02007AA03A /* background.png in Resources */,
 				C7CEF55A16396DA000C4B90C /* Default-568h@2x.png in Resources */,
+				B5C5334A164718A7000D35C6 /* facebook_page_button.png in Resources */,
+				B5C5336016482DB5000D35C6 /* iNotify.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1297,6 +1318,7 @@
 				90CD40AE1631B35200B47E03 /* IAPCatalogue.m in Sources */,
 				90CD40AF1631B35400B47E03 /* FSMMachine.m in Sources */,
 				C7CEF55D163972D100C4B90C /* GADBannerView+SetFrame.m in Sources */,
+				B5C5336116482DB5000D35C6 /* iNotify.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1415,6 +1437,7 @@
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/TestFlightSDK1.1\"",
 					"\"$(SRCROOT)/Admobs\"",
+					"\"$(SRCROOT)/FlurryAds\"",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
@@ -1446,6 +1469,7 @@
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/TestFlightSDK1.1\"",
 					"\"$(SRCROOT)/Admobs\"",
+					"\"$(SRCROOT)/FlurryAds\"",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
