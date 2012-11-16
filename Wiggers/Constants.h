@@ -46,6 +46,11 @@
 #define KEY_CHAIN_PASSWORD @"ZOMBIE_PASSWORD"
 #define KEY_SERVICE_NAME @"ZOMBIE_PACK"
 
+#define KEY_CHAIN_USERNAME_2 @"Facebook"
+#define KEY_CHAIN_PASSWORD_2 @"FACEBOOK_PASSWORD"
+#define KEY_SERVICE_NAME_2 @"FACEBOOK_PAGE"
+
+
 #define IMG(name) [UIImage imageNamed:name]
 //#define FACE_IMAGE_NAMES [NSArray arrayWithObjects:@"mouth.png",@"mouth2.png", @"lefteye.png", @"lefteye2.png",  @"righteye.png",@"righteye2.png",nil]
 //@"yellowJumper1.png",@"yellowJumper2.png",@"medal.png", nil]

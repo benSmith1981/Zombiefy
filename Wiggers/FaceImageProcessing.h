@@ -90,11 +90,12 @@
 
 /**This draws the features on the areas picked up by face detection, it can draw on hair, eyes, sideburns, mouth and scars
  @param f This is a CIFaceFeature object that is returned by the face detection algorithm, it contains eyes, face and mouth positions and size
+ @param faceRect This is the rect for the face, used so that we can pass in location data if no face features are detected
  @param featureType This is custom object type, used to ID if it is a eyes, mouth, hair, scar etc type feature
  @param imageView This is the imageView of the feature we want to add
  @param featurePoint This is the point we want to add the feature at
  */
-- (faceFeature*)drawFeature:(CIFaceFeature*)f ofType:(faceFeatureType)featureType withImage:(UIImageView*)imageView atPoint:(CGPoint)featurePoint;
+- (faceFeature*)drawFeature:(CIFaceFeature*)f withRect:(CGRect)faceRect ofType:(faceFeatureType)featureType withImage:(UIImageView*)imageView atPoint:(CGPoint)featurePoint;
 
 /**This is called to highlight the currently selected overlay with a scrolling marque, so the user knows which one is selected
  @param frame This is the frame for the selected object

@@ -15,6 +15,7 @@
 #import "SHKFacebook.h"
 #import "Constants.h"
 #import "iNotify.h"
+#import "Flurry.h"
 
 @implementation AppDelegate
 
@@ -25,6 +26,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [TestFlight takeOff:@"7e8051c2a51aca626c6c3d07e6bf5b4d_MTQ0MTk0MjAxMi0xMC0xNiAxOTo0MTo1OS4wMzY5NTE"];
+    [Flurry startSession:@"7X9SX6XWH3Q6ZTJGG3GF"];
 
     DefaultSHKConfigurator *configurator = [[MySHKConfigurator alloc] init];
     [SHKConfiguration sharedInstanceWithConfigurator:configurator];
@@ -43,17 +45,10 @@
     //[self logInstalledFonts];
     [[IAPStoreManager sharedInstance] autoUpdate];
     
-    //configure iNotify
-    [iNotify sharedInstance].notificationsPlistURL = @"http://wigtastic.com/notifications.plist";
 
     self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
     return YES;
-}
-
-+ (void)initialize
-{
-
 }
 
 - (void)logInstalledFonts

@@ -7,7 +7,7 @@
 //
 
 #import "ImageManipulationVC.h"
-
+#import "Flurry.h"
 
 @interface ImageManipulationVC ()
 
@@ -317,12 +317,16 @@
     //SAVE
     if (button.tag == 2){
         [self alertSaveBox];
+        [Flurry logEvent:@"Save"];
+
     }
     //SHARE
     else if (button.tag == 1){
         SHKItem *item = [SHKItem image:self.
                          activeImageView.image title:@"Zombiefy, on app store now http://bit.ly/XdXZ3t"];
+        [Flurry logEvent:@"Share button pressed"];
         SHKActionSheet *actionSheet = [SHKActionSheet actionSheetForItem:item];
+        actionSheet.viewToShowFBShare = self;
         [SHK setRootViewController:self];
         [actionSheet showFromToolbar:toolBar];
     }
@@ -339,14 +343,23 @@
 //                                     cancelButtonTitle:@"OK"
 //                                     otherButtonTitles:nil];
 //        [restorePopup show];
-        
-        UIAlertView *joinFacebookPage = [[UIAlertView alloc]
-                                     initWithTitle:@"Follow us on Facebook!"
-                                     message:@"See the best photos taken with Zombiefy!!"
-                                     delegate:self
-                                     cancelButtonTitle:@"No Thanks"
-                                     otherButtonTitles:@"OK",nil];
-        [joinFacebookPage show];
+        NSError *error;
+        NSString *password = [SFHFKeychainUtils getPasswordForUsername:KEY_CHAIN_USERNAME_2 andServiceName:KEY_SERVICE_NAME_2 error:&error];
+        if(![password isEqualToString:KEY_CHAIN_PASSWORD_2]){
+            UIAlertView *joinFacebookPage = [[UIAlertView alloc]
+                                         initWithTitle:@"Follow us on Facebook!"
+                                         message:@"See the best photos taken with Zombiefy!!"
+                                         delegate:self
+                                         cancelButtonTitle:@"No Thanks"
+                                         otherButtonTitles:@"OK",nil];
+            [joinFacebookPage show];
+        }
+        else{
+            self.activeImageView = nil;
+            //deregister the observer
+            [self.product removeObserver:self];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
 
     }
     //Done
@@ -386,6 +399,11 @@
         showMouthContainer = FALSE;
         showEyeContainer = FALSE;
         
+        //remove all the features before adding them in set image else you get double features
+//        for (faceFeature *faceParts in editedFaceFeatures) {
+//            [faceParts.featureImageView removeFromSuperview];
+//        }
+        
         [imageProcessing setImageWithImageViews:editedFaceFeatures];
         [canvas removeGestureRecognizer:pinchRecognizer];
         [canvas removeGestureRecognizer:tapProfileImageRecognizer];
@@ -398,6 +416,8 @@
     }
     //Mouth ScrollView
     else if (button.tag == 5){
+        [Flurry logEvent:@"Mouth"];
+
         if (!showMouthContainer) {
             if(showScarContainer)
             {
@@ -418,6 +438,8 @@
     
     //Eye scroll view
     else if (button.tag == 6){
+        [Flurry logEvent:@"Eye"];
+
         if (!showEyeContainer) {
             if(showScarContainer)
             {
@@ -437,6 +459,8 @@
     }
     //Scar scroll view
     else if (button.tag == 7){
+        [Flurry logEvent:@"Scar"];
+
         if (!showScarContainer) {
             if(showMouthContainer)
             {
@@ -537,18 +561,60 @@
     }
     else if ([alertView.title isEqualToString:@"No Evil Face Detected"])
     {
-        if(buttonIndex == 0) //Main Menu
+        if(buttonIndex == 0)//New Image
         {
-            self.activeImageView = nil;
-            [self.navigationController popViewControllerAnimated:YES];
-        }
-        else if (buttonIndex == 1) //New Image
-        {
+//            self.activeImageView = nil;
+//            [self.navigationController popViewControllerAnimated:YES];
             self.activeImageView = nil;
             [canvas removeFromSuperview];
             [alertView dismissWithClickedButtonIndex:1 animated:YES];
             [self.delegate noFeaturesDetected];
             [self.navigationController popViewControllerAnimated:YES];
+        }
+        else if (buttonIndex == 1)  //Continue so just close window
+        {
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"To Adjust your face..." message:@"1)Tap mouth or eyes 2)Pinch, Flick and Rotate them, to fit to your face to complete Evilification!!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            alert.alertViewStyle = UIAlertViewStyleDefault;
+            [alert show];
+            
+            [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(showLoadingText) object: nil];
+            [loadingWheel stopAnimating];
+            toolBar.hidden = NO;
+            
+            //initialise the FaceImageProcessing intialise
+            imageProcessing = [[FaceImageProcessing alloc]init];
+            imageProcessing.canvas = canvas;
+            imageProcessing.features = featuresLocalInstance;
+            imageProcessing.activeImageView = self.activeImageView;
+            
+            //pass in the images we want to draw on the face
+            editedFaceFeatures = [imageProcessing drawFeaturesAnnotatedWithImageViews];
+            self.activeImageView = imageProcessing.activeImageView;
+            
+            [self.view addSubview:activeImageView];
+            
+            for (faceFeature *faceParts in editedFaceFeatures) {
+                [self.view addSubview:faceParts.featureImageView];
+                
+            }
+            
+            //        [self.view addSubview:[editedImageViews objectAtIndex:0]]; //Hair
+            //        [self.view addSubview:[editedImageViews objectAtIndex:1]];
+            //        [self.view addSubview:[editedImageViews objectAtIndex:2]];
+            
+            //add scrolling marque to indicate selected image
+            [[self.view layer] addSublayer:_marque];
+            //add info over canvas
+            //[self.view bringSubviewToFront:Info];
+            if (![[NSUserDefaults standardUserDefaults] boolForKey:kInAppPurchaseProductID]) {
+                [self.view bringSubviewToFront:bannerView_];
+            }
+            [self.view bringSubviewToFront:toolBar];
+            
+            
+            [soundPlayer playSound:[soundPlayer.funnyClipsPlayer objectAtIndex:1] numberofTimes:1];
+            
+
         }
     }
     else if ([alertView.title isEqualToString:@"Unlock ALL Zombie Features"])
@@ -563,6 +629,8 @@
     {
         //NO
         if (buttonIndex == 0) {
+            [Flurry logEvent:@"Don't Follow on Facebook"];
+
             self.activeImageView = nil;
             //deregister the observer
             [self.product removeObserver:self];
@@ -571,7 +639,17 @@
         //FACEBOOK
         else if (buttonIndex == 1)
         {
+            [Flurry logEvent:@"Follow on facebook"];
+
+            self.activeImageView = nil;
+            //deregister the observer
+            [self.product removeObserver:self];
+            [self.navigationController popViewControllerAnimated:YES];
+            
+            NSError *error;
             [self launchRemoteUrlForTrack:@"288981524551602"];
+            [SFHFKeychainUtils storeUsername:KEY_CHAIN_USERNAME_2 andPassword:KEY_CHAIN_PASSWORD_2 forServiceName:KEY_SERVICE_NAME_2 updateExisting:YES error:&error];
+
 
         }
 //        //Twitter
@@ -628,16 +706,16 @@
 {
     //[soundPlayer fadeSound:soundPlayer.player];
     if ([featuresLocalInstance count] == 0) {
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"No Evil Face Detected" message:@"No Evil Face was detected, please take another image" delegate:self cancelButtonTitle:@"Main Menu" otherButtonTitles:@"New Image",nil];
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"No Evil Face Detected" message:@"No Evil Face was detected, take another image or continue" delegate:self cancelButtonTitle:@"New Image" otherButtonTitles:@"Continue",nil];
         alert.alertViewStyle = UIAlertViewStyleDefault;
         [alert show];
+
     }
-    else {
+    else
+    {
         UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"To Adjust your face..." message:@"1)Tap mouth or eyes 2)Pinch, Flick and Rotate them, to fit to your face to complete Evilification!!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         alert.alertViewStyle = UIAlertViewStyleDefault;
         [alert show];
-        
-
         
         [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(showLoadingText) object: nil];
         [loadingWheel stopAnimating];
@@ -1216,7 +1294,13 @@
     }
     else //if(featureType != scarType)
     {
-        facePart = [imageProcessing drawFeature:feature ofType:featureType withImage:[[UIImageView alloc]initWithImage:[UIImage imageNamed:[facePartsArray objectAtIndex:[sender tag]]]] atPoint:feature.bounds.origin];
+        if (feature == nil) {
+            facePart = [imageProcessing drawFeature:nil withRect:faceFeatureParam.fakeRect ofType:featureType withImage:[[UIImageView alloc]initWithImage:[UIImage imageNamed:[facePartsArray objectAtIndex:[sender tag]]]] atPoint:faceFeatureParam.fakeRect.origin];
+        }
+        else{
+            facePart = [imageProcessing drawFeature:feature withRect:feature.bounds ofType:featureType withImage:[[UIImageView alloc]initWithImage:[UIImage imageNamed:[facePartsArray objectAtIndex:[sender tag]]]] atPoint:feature.bounds.origin];
+        }
+
         [faceFeatureParam.featureImageView removeFromSuperview];
         [self.view addSubview:facePart.featureImageView];
         faceFeatureParam.isShown = TRUE;
@@ -1241,19 +1325,23 @@
 }
 
 -(void)scale:(id)sender {
- 
+    [Flurry logEvent:@"scale"];
+
     [imageProcessing scale:sender withView:self.view];
 
 }
 
 -(void)rotate:(id)sender {
-    
+    [Flurry logEvent:@"rotate"];
+
     [imageProcessing rotate:sender withView:self.view];
     [imageProcessing showOverlayWithFrame:imageProcessing.activeFacePart.frame withMarque:_marque];
 }
 
 
 -(void)move:(id)sender {
+    [Flurry logEvent:@"move"];
+
     [imageProcessing move:sender withView:self.view withEditedFaceFeatures:editedFaceFeatures];
     [imageProcessing showOverlayWithFrame:imageProcessing.activeFacePart.frame withMarque:_marque];
 

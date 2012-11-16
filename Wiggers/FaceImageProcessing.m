@@ -33,9 +33,11 @@
         
         
         CIImage *imageToScan = [[CIImage alloc]initWithImage:faceImage];
-        
-        NSString *accuracy = CIDetectorAccuracyHigh;
-        NSDictionary *options = [NSDictionary dictionaryWithObject:accuracy forKey:CIDetectorAccuracy];
+
+        //NSString *accuracy = CIDetectorAccuracyHigh;
+        NSNumber *orientation = [NSNumber numberWithInt:[faceImage imageOrientation]+1];
+        NSDictionary *options = [NSDictionary dictionaryWithObject:orientation forKey: CIDetectorImageOrientation];
+        //NSDictionary *options = [NSDictionary dictionaryWithObject:accuracy forKey:CIDetectorAccuracy];
         CIDetector *detector = [CIDetector detectorOfType:CIDetectorTypeFace context:nil options:options];
         
         
@@ -93,29 +95,56 @@
         //Setup the face features that are initially drawn onto the image
         UIImageView *mouthParts = [[UIImageView alloc]initWithImage:[UIImage imageNamed:[MOUTH_PARTS objectAtIndex:0]]];
         //then draw them onto the face
-        faceFeature *tempFaceFeature = [self drawFeature:f ofType:mouthType withImage:mouthParts atPoint:f.bounds.origin];
+        faceFeature *tempFaceFeature = [self drawFeature:f withRect:f.bounds ofType:mouthType withImage:mouthParts atPoint:f.bounds.origin];
         //set them as shown
         tempFaceFeature.isShown = YES;
         //add them to the array that we pass back
         [faceFeatures addObject:tempFaceFeature];
         
         UIImageView *leftSB = [[UIImageView alloc]initWithImage:[UIImage imageNamed:[LEFTEYE_PARTS objectAtIndex:0]]];
-        tempFaceFeature = [self drawFeature:f ofType:leftEyeType withImage:leftSB atPoint:f.bounds.origin];
+        tempFaceFeature = [self drawFeature:f withRect:f.bounds ofType:leftEyeType withImage:leftSB atPoint:f.bounds.origin];
         tempFaceFeature.isShown = YES;
         [faceFeatures addObject:tempFaceFeature];
         
         UIImageView *rightSB = [[UIImageView alloc]initWithImage:[UIImage imageNamed:[RIGHTEYE_PARTS objectAtIndex:0]]];
-        tempFaceFeature = [self drawFeature:f ofType:rightEyeType withImage:rightSB atPoint:f.bounds.origin];
+        tempFaceFeature = [self drawFeature:f withRect:f.bounds ofType:rightEyeType withImage:rightSB atPoint:f.bounds.origin];
         tempFaceFeature.isShown = YES;
         [faceFeatures addObject:tempFaceFeature];
         
         UIImageView *scar = [[UIImageView alloc]initWithImage:[UIImage imageNamed:[SCAR_PARTS objectAtIndex:0]]];
-        tempFaceFeature = [self drawFeature:f ofType:scarType withImage:scar atPoint:f.bounds.origin];
+        tempFaceFeature = [self drawFeature:f withRect:f.bounds ofType:scarType withImage:scar atPoint:f.bounds.origin];
         tempFaceFeature.isShown = YES;
         [faceFeatures addObject:tempFaceFeature];
         
         
         
+    }
+    
+    if ([features count] == 0 ) {
+        CGRect estimatedFace = CGRectMake(50, 50, 200, 200);
+        //Setup the face features that are initially drawn onto the image
+        UIImageView *mouthParts = [[UIImageView alloc]initWithImage:[UIImage imageNamed:[MOUTH_PARTS objectAtIndex:0]]];
+        //then draw them onto the face
+        faceFeature *tempFaceFeature = [self drawFeature:nil withRect:estimatedFace ofType:mouthType withImage:mouthParts atPoint:estimatedFace.origin];
+        //set them as shown
+        tempFaceFeature.isShown = YES;
+        //add them to the array that we pass back
+        [faceFeatures addObject:tempFaceFeature];
+        
+        UIImageView *leftSB = [[UIImageView alloc]initWithImage:[UIImage imageNamed:[LEFTEYE_PARTS objectAtIndex:0]]];
+        tempFaceFeature = [self drawFeature:nil withRect:estimatedFace ofType:leftEyeType withImage:leftSB atPoint:estimatedFace.origin];
+        tempFaceFeature.isShown = YES;
+        [faceFeatures addObject:tempFaceFeature];
+        
+        UIImageView *rightSB = [[UIImageView alloc]initWithImage:[UIImage imageNamed:[RIGHTEYE_PARTS objectAtIndex:0]]];
+        tempFaceFeature = [self drawFeature:nil withRect:estimatedFace ofType:rightEyeType withImage:rightSB atPoint:estimatedFace.origin];
+        tempFaceFeature.isShown = YES;
+        [faceFeatures addObject:tempFaceFeature];
+        
+        UIImageView *scar = [[UIImageView alloc]initWithImage:[UIImage imageNamed:[SCAR_PARTS objectAtIndex:0]]];
+        tempFaceFeature = [self drawFeature:nil withRect:estimatedFace ofType:scarType withImage:scar atPoint:estimatedFace.origin];
+        tempFaceFeature.isShown = YES;
+        [faceFeatures addObject:tempFaceFeature];
     }
     //make sure we set the activeimageview image to that of the graphics context so we now draw the annotated features onto the screen
     activeImageView.image = UIGraphicsGetImageFromCurrentImageContext();
@@ -201,25 +230,24 @@
     [activeImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
     activeImageView.image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    activeImageView.image = [self dumpOverlayViewToImage];//]:activeImageView];
-    //activeImageView.image = [activeImageView.image imageWithOverlayColor:[UIColor greenColor]];
+    activeImageView.image = [self dumpOverlayViewToImage];
     activeFacePart = nil;
     
     
 }
 
 
-- (faceFeature*)drawFeature:(CIFaceFeature*)f ofType:(faceFeatureType)featureType withImage:(UIImageView*)imageView atPoint:(CGPoint)featurePoint{
+- (faceFeature*)drawFeature:(CIFaceFeature*)f withRect:(CGRect)faceRect ofType:(faceFeatureType)featureType withImage:(UIImageView*)imageView atPoint:(CGPoint)featurePoint{
 
     //Calcualte the size of sideburns according to the face size
-    CGFloat leftSBScaleWidth = f.bounds.size.width*1/4;
-    CGFloat leftSBScaleHeight = f.bounds.size.height*1/1.8;
-    CGFloat rightSBScaleWidth = f.bounds.size.width*1/4;
-    CGFloat rightSBScaleHeight = f.bounds.size.height*1/1.8;
+    CGFloat leftSBScaleWidth = faceRect.size.width*1/4;
+    CGFloat leftSBScaleHeight = faceRect.size.height*1/1.8;
+    CGFloat rightSBScaleWidth = faceRect.size.width*1/4;
+    CGFloat rightSBScaleHeight = faceRect.size.height*1/1.8;
     
     //get face size and height and store in variables (used to scale everything else)
-    CGFloat faceWidth = f.bounds.size.width;
-    CGFloat faceHeight = f.bounds.size.height;
+    CGFloat faceWidth = faceRect.size.width;
+    CGFloat faceHeight = faceRect.size.height;
     
     
     // CoreImage coordinate system origin is at the bottom left corner and UIKit's
@@ -228,13 +256,39 @@
     transform = CGAffineTransformMakeScale(1, -1);
     transform = CGAffineTransformTranslate(transform,
                                            0, -activeImageView.bounds.size.height);
+    
+    CGPoint leftEye;
+    CGPoint rightEye;
+    CGPoint mouth;
+    if(f == nil)
+    {
+        leftEye = CGPointMake(faceRect.origin.x + faceRect.size.width/3, faceRect.origin.y + faceRect.size.height/1.5);
+        rightEye = CGPointMake(faceRect.origin.x + faceRect.size.width - faceRect.size.width/3, faceRect.origin.y + faceRect.size.height/1.5);
+        mouth = CGPointMake(faceRect.origin.x + faceRect.size.width/2, faceRect.origin.y + faceRect.size.height/3);
+    }
+    else{
+        leftEye = f.leftEyePosition;
+        rightEye = f.rightEyePosition;
+        mouth = f.mouthPosition;
+    }
+    
 
     faceFeature *newFaceFeature = [[faceFeature alloc]init];
+    if(f == nil)
+    {
+        newFaceFeature.fakeRect = faceRect;
+        
+    }
+    else
+    {
+        newFaceFeature.featureBelongsToo = f;
+    }
     switch (featureType) {
         case 1:// left eye
-            if(f.hasLeftEyePosition){
+            //if(f.hasLeftEyePosition)
+            {
                 // Get the mouth position translated to imageView UIKit coordinates
-                CGPoint eyePos = CGPointApplyAffineTransform(f.leftEyePosition, transform);
+                CGPoint eyePos = CGPointApplyAffineTransform(leftEye, transform);
                 //scale the mouth image size according to the dimensions of the face
                 imageView.image = [imageView.image imageByScalingProportionallyToSize:CGSizeMake(faceWidth*0.4,faceHeight*0.4)];
                 //set frame of mouth image to be equal to that of the image, but adjust the x and y coords slightly as they are offset by scaling of the image
@@ -244,30 +298,30 @@
                 //set the newFaceFeature objects imageView
                 newFaceFeature.featureImageView = imageView;
                 //set the newFaceFeature objects CIFaceFeature variable
-                newFaceFeature.featureBelongsToo = f;
+
             }
             break;
         case 2:// right eye
-            if(f.hasRightEyePosition){
+            //if(f.hasRightEyePosition)
+            {
                 // Get the mouth position translated to imageView UIKit coordinates
-                CGPoint eyePos = CGPointApplyAffineTransform(f.rightEyePosition, transform);
+                CGPoint eyePos = CGPointApplyAffineTransform(rightEye, transform);
                 imageView.image = [imageView.image imageByScalingProportionallyToSize:CGSizeMake(faceWidth*0.4,faceHeight*0.4)];
                 imageView.frame = CGRectMake(eyePos.x-imageView.image.size.width/2,eyePos.y-imageView.image.size.width/2,imageView.image.size.width, imageView.image.size.height );
                 [newFaceFeature setType:featureType];
                 newFaceFeature.featureImageView = imageView;
-                newFaceFeature.featureBelongsToo = f;
             }
             break;
         case 3:// mouth
-            if(f.hasMouthPosition){
+            //if(f.hasMouthPosition)
+            {
                 // Get the mouth position translated to imageView UIKit coordinates
-                CGPoint mouthPos = CGPointApplyAffineTransform(f.mouthPosition, transform);
+                CGPoint mouthPos = CGPointApplyAffineTransform(mouth, transform);
                                 
                 imageView.image = [imageView.image imageByScalingProportionallyToSize:CGSizeMake(faceWidth*0.6,faceHeight*0.6)];
                 imageView.frame = CGRectMake(mouthPos.x-imageView.image.size.width/2,mouthPos.y-imageView.image.size.height/2,imageView.image.size.width, imageView.image.size.height );
                 [newFaceFeature setType:featureType];
                 newFaceFeature.featureImageView = imageView;
-                newFaceFeature.featureBelongsToo = f;
             }
             break;
         case 4://hair
@@ -275,15 +329,12 @@
             imageView.frame = CGRectMake(f.bounds.origin.x-f.bounds.size.width/8.5, IMG_HEIGHT - (f.bounds.origin.y + f.bounds.size.height + f.bounds.size.height/2 ), imageView.image.size.width,imageView.image.size.height);            
             [newFaceFeature setType:featureType];
             newFaceFeature.featureImageView = imageView;
-            newFaceFeature.featureBelongsToo = f;
             break;
         case 5:// left sideburn
             imageView.image = [imageView.image imageByScalingProportionallyToSize:CGSizeMake(leftSBScaleWidth,leftSBScaleHeight)];
             imageView.frame = CGRectMake(f.bounds.origin.x, IMG_HEIGHT - (f.bounds.origin.y + imageView.image.size.height + f.bounds.size.height/4), imageView.image.size.width, imageView.image.size.height);
             [newFaceFeature setType:featureType];
             newFaceFeature.featureImageView = imageView;
-            newFaceFeature.featureBelongsToo = f;
-
             
             break;
         case 6:// right sideburn
@@ -291,8 +342,6 @@
             imageView.frame = CGRectMake(f.bounds.origin.x + f.bounds.size.width - imageView.image.size.width, IMG_HEIGHT - (f.bounds.origin.y + imageView.image.size.height + f.bounds.size.height/4),  imageView.image.size.width, imageView.image.size.height );
             [newFaceFeature setType:featureType];
             newFaceFeature.featureImageView = imageView;
-            newFaceFeature.featureBelongsToo = f;
-
             break;
         case 7:// scarType
 
@@ -300,7 +349,6 @@
             imageView.frame = CGRectMake(f.bounds.origin.x + (faceWidth*0.7 - imageView.image.size.width/2), IMG_HEIGHT - (f.bounds.origin.y + faceHeight*0.9 + imageView.image.size.height), imageView.image.size.width, imageView.image.size.height);
             [newFaceFeature setType:featureType];
             newFaceFeature.featureImageView = imageView;
-            newFaceFeature.featureBelongsToo = f;
             break;
         default:
             break;

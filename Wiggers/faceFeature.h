@@ -16,6 +16,8 @@
 @property (nonatomic) faceFeatureType buttonType;
 @property (nonatomic, strong)UILabel *selectedLabel;
 
+@property (nonatomic)CGRect fakeRect;
+
 @property (nonatomic, strong)CIFaceFeature *featureBelongsToo;
 @property (nonatomic, strong)UIImageView *featureImageView;
 @property (nonatomic, strong)UIButton *featureButton;

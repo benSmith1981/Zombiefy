@@ -8,6 +8,7 @@
 
 #import "MainScreenVC.h"
 #import "GADBannerView+SetFrame.h"
+#import "iNotify.h"
 
 @interface MainScreenVC ()
 
@@ -27,6 +28,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    //configure iNotify
+    [iNotify sharedInstance].notificationsPlistURL = @"http://wigtastic.com/notifications.plist";
+
     [self.navigationController setNavigationBarHidden:YES];
     //[self initProduct:kInAppPurchaseProductID];
 

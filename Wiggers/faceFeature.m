@@ -9,7 +9,7 @@
 #import "faceFeature.h"
 
 @implementation faceFeature
-@synthesize featureImageView,featureBelongsToo,featureButton,isShown,selectedLabel,buttonType;
+@synthesize featureImageView,featureBelongsToo,featureButton,isShown,selectedLabel,buttonType,fakeRect;
 
 -(faceFeatureType)isOfType{
     return featureType;
