@@ -322,13 +322,13 @@
     }
     //SHARE
     else if (button.tag == 1){
-        SHKItem *item = [SHKItem image:self.
-                         activeImageView.image title:@"Zombiefy, on app store now http://bit.ly/XdXZ3t"];
-        [Flurry logEvent:@"Share button pressed"];
-        SHKActionSheet *actionSheet = [SHKActionSheet actionSheetForItem:item];
-        actionSheet.viewToShowFBShare = self;
-        [SHK setRootViewController:self];
-        [actionSheet showFromToolbar:toolBar];
+//        SHKItem *item = [SHKItem image:self.
+//                         activeImageView.image title:@"Zombiefy, on app store now http://bit.ly/XdXZ3t"];
+//        [Flurry logEvent:@"Share button pressed"];
+//        SHKActionSheet *actionSheet = [SHKActionSheet actionSheetForItem:item];
+//        actionSheet.viewToShowFBShare = self;
+//        [SHK setRootViewController:self];
+//        [actionSheet showFromToolbar:toolBar];
     }
     //Main Menu
     else if (button.tag == 3){

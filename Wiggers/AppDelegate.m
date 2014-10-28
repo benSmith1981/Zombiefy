@@ -111,10 +111,10 @@
 #pragma mark - Single Sign on with Facebook
 - (BOOL)handleOpenURL:(NSURL*)url
 {
-    NSString* scheme = [url scheme];
-    NSString* prefix = [NSString stringWithFormat:@"fb%@", SHKCONFIG(facebookAppId)];
-    if ([scheme hasPrefix:prefix])
-        return [SHKFacebook handleOpenURL:url];
+//    NSString* scheme = [url scheme];
+//    NSString* prefix = [NSString stringWithFormat:@"fb%@", SHKCONFIG(facebookAppId)];
+//    if ([scheme hasPrefix:prefix])
+//        return [SHKFacebook handleOpenURL:url];
     return YES;
 }
 

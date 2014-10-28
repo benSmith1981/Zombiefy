@@ -14,16 +14,9 @@
 		<string>57x57.png</string>
 	</array>
 	<key>CFBundleIcons</key>
-	<dict>
-		<key>CFBundlePrimaryIcon</key>
-		<dict>
-			<key>CFBundleIconFiles</key>
-			<array>
-				<string>114x114.png</string>
-				<string>57x57.png</string>
-			</array>
-		</dict>
-	</dict>
+	<dict/>
+	<key>CFBundleIcons~ipad</key>
+	<dict/>
 	<key>CFBundleIdentifier</key>
 	<string>com.BenSmithInc.Zombify</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -57,6 +50,8 @@
 	<string>1.3</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSMainNibFile</key>
+	<string>MainScreenVC_iPhone</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>DoubleFeature20.ttf</string>

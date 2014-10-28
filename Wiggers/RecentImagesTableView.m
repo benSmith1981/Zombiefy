@@ -169,10 +169,10 @@
     }
     //Share
     else if (button.tag == 3) {
-        SHKItem *item = [SHKItem image:loadedImageView.image title:@"Zombiefy iPhone app, scare all your friends on Facebook and Twitter http://bit.ly/XdXZ3t"];
-        SHKActionSheet *actionSheet = [SHKActionSheet actionSheetForItem:item];
-        [SHK setRootViewController:self];
-        [actionSheet showFromToolbar:toolBar];
+//        SHKItem *item = [SHKItem image:loadedImageView.image title:@"Zombiefy iPhone app, scare all your friends on Facebook and Twitter http://bit.ly/XdXZ3t"];
+//        SHKActionSheet *actionSheet = [SHKActionSheet actionSheetForItem:item];
+//        [SHK setRootViewController:self];
+//        [actionSheet showFromToolbar:toolBar];
     }
     //Delete
     else if (button.tag == 2) {
