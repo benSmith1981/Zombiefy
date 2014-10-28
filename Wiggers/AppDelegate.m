@@ -36,7 +36,7 @@
 
     // Override point for customization after application launch.
     //if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        self.viewController = [[MainScreenVC alloc] initWithNibName:@"MainScreenVC_iPhone" bundle:nil];
+        self.viewController = [[MainScreenVC alloc] initWithNibName:@"MainScreenCopy" bundle:nil];
         self.navigationController = [[UINavigationController alloc] initWithRootViewController:self.viewController];
     //}
 //    else {

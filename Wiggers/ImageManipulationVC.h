@@ -153,7 +153,7 @@
 
 /** Allows custom buttons to be created with their own size text and font
  */
-- (UIBarButtonItem *)customAddButtonItem:(NSString*)title WithTarget:(id)target action:(SEL)action andTag:(int)tag andTextSize:(int)textSize;
+//- (UIBarButtonItem *)customAddButtonItem:(NSString*)title WithTarget:(id)target action:(SEL)action andTag:(int)tag andTextSize:(int)textSize;
 
 /** Called when image detection has finished, determines what happens if a face is detected or not, giving the user information about what to do next
  */
@@ -194,7 +194,7 @@
 -(void)createNewLeftSBParts:(id)sender;
 -(void)createNewRightSBParts:(id)sender;
 -(void)createNewScarParts:(id)sender;
--(void)createNewMedalParts:(id)sender;
+//-(void)createNewMedalParts:(id)sender;
 
 /** This method is key to adding features onto the face, the actual image processing doesn't happen here but is passed into the FaceImageProcessing class, it is called from the createNew... methods passing in the different features about the face feature to add
  @param faceFeatureParam

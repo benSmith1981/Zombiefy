@@ -26,7 +26,7 @@
 @synthesize loadingText;
 @synthesize loadingWheel;
 @synthesize activeImageView;
-//@synthesize xCoord,yCoord,width,height;
+//@synthesize xCoord,yCoord,width,heigh t;
 @synthesize cameraVC;
 @synthesize product;
 
@@ -272,8 +272,16 @@
     CGSize constraintSize;
     constraintSize.width = customButtonView.frame.size.width;
     constraintSize.height = customButtonView.frame.size.height;
-    CGSize theSize = [title sizeWithFont:[UIFont fontWithName:FONT_TYPE size:textSize] constrainedToSize:constraintSize lineBreakMode:UILineBreakModeMiddleTruncation];
-    UILabel *backLabel = [[UILabel alloc]initWithFrame:CGRectMake((customButtonView.frame.size.width-theSize.width)/2, (customButtonView.frame.size.height-theSize.height)/2, theSize.width, theSize.height)];
+    
+    NSDictionary *fontAttribute = [NSDictionary dictionaryWithObjectsAndKeys:
+                                   FONT_TYPE, NSFontAttributeName,nil];
+    
+    CGRect theSize = [title boundingRectWithSize:constraintSize
+                                         options:NSStringDrawingUsesFontLeading
+                                      attributes:fontAttribute
+                                         context:nil];
+//    CGSize theSize = [title sizeWithFont:[UIFont fontWithName:FONT_TYPE size:textSize] constrainedToSize:constraintSize lineBreakMode:UILineBreakModeMiddleTruncation];
+    UILabel *backLabel = [[UILabel alloc]initWithFrame:CGRectMake((customButtonView.frame.size.width-theSize.size.width)/2, (customButtonView.frame.size.height-theSize.size.height)/2, theSize.size.width, theSize.size.height)];
     backLabel.font = [UIFont fontWithName:FONT_TYPE size:textSize];
     backLabel.text = title;
     backLabel.textColor = colour;

@@ -51,7 +51,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSMainNibFile</key>
-	<string>MainScreenVC_iPhone</string>
+	<string>MainScreenCopy</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>DoubleFeature20.ttf</string>

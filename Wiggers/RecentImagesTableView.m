@@ -99,9 +99,18 @@
     CGSize constraintSize;
     constraintSize.width = customButtonView.frame.size.width;
     constraintSize.height = customButtonView.frame.size.height;
-    CGSize theSize = [title sizeWithFont:[UIFont fontWithName:FONT_TYPE size:textSize] constrainedToSize:constraintSize lineBreakMode:UILineBreakModeMiddleTruncation];
-    UILabel *backLabel = [[UILabel alloc]initWithFrame:CGRectMake((customButtonView.frame.size.width-theSize.width)/2, (customButtonView.frame.size.height-theSize.height)/2, theSize.width, theSize.height)];
-    NSLog(@"Height %f Width %f",theSize.height,theSize.width);
+    
+    NSDictionary *fontAttribute = [NSDictionary dictionaryWithObjectsAndKeys:
+                                   FONT_TYPE, NSFontAttributeName,nil];
+    
+    CGRect theSize = [title boundingRectWithSize:constraintSize
+                                         options:NSStringDrawingUsesFontLeading
+                                      attributes:fontAttribute
+                                         context:nil];
+    
+//    CGSize theSize = [title sizeWithFont:[UIFont fontWithName:FONT_TYPE size:textSize] constrainedToSize:constraintSize lineBreakMode:NSLineBreakByTruncatingMiddle];
+    UILabel *backLabel = [[UILabel alloc]initWithFrame:CGRectMake((customButtonView.frame.size.width-theSize.size.width)/2, (customButtonView.frame.size.height-theSize.size.height)/2, theSize.size.width, theSize.size.height)];
+    NSLog(@"Height %f Width %f",theSize.size.height,theSize.size.width);
     backLabel.font = [UIFont fontWithName:FONT_TYPE size:textSize];
     backLabel.text = title;
 

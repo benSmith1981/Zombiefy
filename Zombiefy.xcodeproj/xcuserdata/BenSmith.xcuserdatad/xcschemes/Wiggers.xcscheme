@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BE24841515F0DB9A00219F13"
-            BuildableName = "Wigtastic.app"
+            BuildableName = "Zombiefy.app"
             BlueprintName = "Zombify"
             ReferencedContainer = "container:Zombiefy.xcodeproj">
          </BuildableReference>
@@ -52,7 +52,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BE24841515F0DB9A00219F13"
-            BuildableName = "Wigtastic.app"
+            BuildableName = "Zombiefy.app"
             BlueprintName = "Zombify"
             ReferencedContainer = "container:Zombiefy.xcodeproj">
          </BuildableReference>

@@ -161,7 +161,7 @@
            ofFontType:(UIFont*)fontParam
 {
     label.layer.cornerRadius = 8;
-    label.textAlignment = UITextAlignmentCenter;
+    label.textAlignment = NSTextAlignmentCenter;
     label.text = text;
     label.textColor = colour;
     label.backgroundColor = [UIColor grayColor];
@@ -184,7 +184,13 @@
     UIGraphicsBeginImageContext(image.size);
     [image drawInRect:CGRectMake(0,0,image.size.width,image.size.height)];
     [colour set];
-    [text drawAtPoint:point withFont:font];
+    
+    NSDictionary *fontAttribute = [NSDictionary dictionaryWithObjectsAndKeys:
+                                     colour, NSForegroundColorAttributeName,
+                                     font, NSFontAttributeName, nil];
+                                    
+    [text drawAtPoint:point withAttributes:fontAttribute];
+     //drawAtPoint:point withFont:font];
     
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();

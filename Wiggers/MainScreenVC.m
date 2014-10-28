@@ -88,8 +88,19 @@
     constraintSize.height = TITLE_HEIGHT;
     mainTitle.text = @"Zombiefy Yourself!";
     mainTitle.textColor = [UIColor blackColor];
-    CGSize theSize = [mainTitle.text sizeWithFont:[UIFont fontWithName:FONT_TYPE size:TITLE_FONT_SIZE] constrainedToSize:constraintSize lineBreakMode:UILineBreakModeMiddleTruncation];
-    mainTitle.frame = CGRectMake((self.view.frame.size.width-theSize.width)/2,(TITLE_HEIGHT-theSize.height)/2, theSize.width,theSize.height);
+    
+    NSDictionary *fontAttribute = [NSDictionary dictionaryWithObjectsAndKeys:
+                                   FONT_TYPE, NSFontAttributeName,nil];
+    
+    CGRect theSize = [mainTitle.text boundingRectWithSize:constraintSize
+                                                 options:NSStringDrawingUsesFontLeading
+                                              attributes:fontAttribute
+                                                 context:nil];
+    
+//    CGSize theSize = [mainTitle.text sizeWithFont:[UIFont fontWithName:FONT_TYPE size:TITLE_FONT_SIZE] constrainedToSize:constraintSize lineBreakMode:NSLineBreakByTruncatingMiddle];
+    mainTitle.frame = CGRectMake((self.view.frame.size.width-theSize.size.width)/2,
+                                 (TITLE_HEIGHT-theSize.size.height)/2,
+                                 theSize.size.width,theSize.size.height);
     [mainTitle setFont:[UIFont fontWithName:FONT_TYPE size:TITLE_FONT_SIZE]];
     
 //    Animation *animateCogs = [[Animation alloc]init];
@@ -266,7 +277,8 @@
     {
         [self.cameraVC setupImagePicker:sourceType];
         
-        [self presentModalViewController:self.cameraVC.imagePickerController animated:YES];
+        [self presentViewController:self.cameraVC.imagePickerController animated:YES completion:nil];
+         //presentModalViewController:self.cameraVC.imagePickerController animated:YES];
     }
 }
 
@@ -328,9 +340,7 @@
 // as a delegate we are told to finished with the camera
 - (void)didFinishWithCamera
 {
-    [self dismissModalViewControllerAnimated:YES];
-
-
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - INApp purchasing

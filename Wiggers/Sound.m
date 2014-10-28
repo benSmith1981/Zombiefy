@@ -60,7 +60,7 @@ static Sound *sharedSingleton = nil;
 }
 
 //intialise and array of sound files
--(void)initWithSounds:(NSMutableArray*)arraySound
+-(void)initWithSounds:(NSArray*)arraySound
 {
     soundOn = TRUE;
 

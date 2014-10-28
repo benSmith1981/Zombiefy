@@ -30,7 +30,7 @@
 -(void) playSound:(AVAudioPlayer*)sound numberofTimes:(int)loops;
 //-(void) playSound:(int)loops;
 -(void) fadeSound;
--(void)initWithSounds:(NSMutableArray*)arraySound;
+-(void)initWithSounds:(NSArray*)arraySound;
 -(void)addSoundToQueue:(NSString*)snd;
 -(void) prepareSound:(AVAudioPlayer*)sound;
 -(void) fadeSound:(AVAudioPlayer*)sound;

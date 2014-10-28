@@ -44,9 +44,6 @@ install_resource()
   esac
 }
           install_resource "Facebook-iOS-SDK/src/FBUserSettingsViewResources.bundle"
-                    install_resource "Pinterest-iOS/PinItSDKiOS/Pinterest.embeddedframework/Pinterest.framework/Versions/A/Resources/PinterestSDKResources.bundle"
-                    install_resource "ShareKit/Frameworks/GooglePlus.bundle"
-                    install_resource "ShareKit/Frameworks/LiveSDK.framework"
                     install_resource "iNotify/iNotify/iNotify.bundle"
                     install_resource "${BUILT_PRODUCTS_DIR}/ShareKit.bundle"
           

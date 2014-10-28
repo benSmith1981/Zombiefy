@@ -61,7 +61,7 @@
  @param CGPoint the point to draw the text at on the image
  @return the image to return with the text drawn onto
  */
-- (UIImage*) drawText:(NSString*)text inImage:(UIImage*)image atPoint:(CGPoint)point;
+//- (UIImage*) drawText:(NSString*)text inImage:(UIImage*)image atPoint:(CGPoint)point;
 
 /**A method to draw text onto a UILabel with any position, colour and fontType
  @param NSString of the text to draw

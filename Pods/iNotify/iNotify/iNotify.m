@@ -384,10 +384,10 @@ static iNotify *sharedInstance = nil;
         }
         
         //deprecated code path
-        else if ([self.delegate respondsToSelector:@selector(iNotifyNotificationsCheckFailed:)])
+        else if ([self.delegate respondsToSelector:@selector(iNotifyNotificationsCheckDidFailWithError:)])
         {
             NSLog(@"iNotifyNotificationsCheckFailed: delegate method is deprecated, use iNotifyNotificationsCheckDidFailWithError: instead");
-            [self.delegate performSelector:@selector(iNotifyNotificationsCheckFailed:) withObject:self.downloadError];
+            [self.delegate performSelector:@selector(iNotifyNotificationsCheckDidFailWithError:) withObject:self.downloadError];
         }
         
         return;
@@ -580,7 +580,7 @@ static iNotify *sharedInstance = nil;
                 if ([label.text isEqualToString:alertView.message])
                 {
                     label.alpha = 1.0f;
-                    label.lineBreakMode = UILineBreakModeWordWrap;
+                    label.lineBreakMode = NSLineBreakByWordWrapping;
                     label.numberOfLines = 0;
                     [label sizeToFit];
                     offset = label.frame.size.height - frame.size.height;

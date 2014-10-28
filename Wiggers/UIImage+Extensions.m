@@ -7,8 +7,8 @@
 
 #import "UIImage+Extensions.h"
 
-CGFloat DegreesToRadians(CGFloat degrees) {return degrees * M_PI / 180;};
-CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
+#define DegreesToRadians(x) (M_PI * x / 180.0)
+#define RadiansToDegrees(x) (x * 180.0/M_PI)
 
 @implementation UIImage (Extensions)
 

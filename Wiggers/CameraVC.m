@@ -14,7 +14,8 @@
 @end
 
 @implementation CameraVC
-@synthesize delegate,imagePickerController,cameraImageView;
+@synthesize delegate, imagePickerController, cameraImageView;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];

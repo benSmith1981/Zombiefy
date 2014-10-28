@@ -1,6 +1,5 @@
 PODS:
   - Bolts (1.1.3)
-  - Dropbox-iOS-SDK (1.3.13)
   - Evernote-SDK-iOS (1.3.1):
     - SSKeychain (~> 1.2.2)
   - Facebook-iOS-SDK (3.16.2):
@@ -10,45 +9,12 @@ PODS:
   - FlurrySDK/FlurrySDK (5.4.0)
   - Google-AdMob-Ads-SDK (6.12.0)
   - iNotify (1.5.5)
-  - Pinterest-iOS (2.3)
   - PKMultipartInputStream (1.1.0)
   - PocketAPI (1.0.2)
   - SAMTextView (0.2.1)
   - SDWebImage (3.7.1):
     - SDWebImage/Core
   - SDWebImage/Core (3.7.1)
-  - ShareKit (3.0.0):
-    - ShareKit/Core
-    - ShareKit/Delicious
-    - ShareKit/Diigo
-    - ShareKit/Dropbox
-    - ShareKit/Evernote
-    - ShareKit/Facebook
-    - ShareKit/Flickr
-    - ShareKit/Foursquare
-    - ShareKit/GooglePlus
-    - ShareKit/Hatena
-    - ShareKit/Imgur
-    - ShareKit/Instagram
-    - ShareKit/Instapaper
-    - ShareKit/Kippt
-    - ShareKit/LinkedIn
-    - ShareKit/NoARC
-    - ShareKit/OneNote
-    - ShareKit/Open in 1Password
-    - ShareKit/Open in Google Chrome
-    - ShareKit/Pinboard
-    - ShareKit/Pinterest
-    - ShareKit/Plurk
-    - ShareKit/Pocket
-    - ShareKit/Reachability
-    - ShareKit/Readability
-    - ShareKit/ReadingList
-    - ShareKit/ReadItLater
-    - ShareKit/SinaWeibo
-    - ShareKit/Tumblr
-    - ShareKit/Twitter
-    - ShareKit/Vkontakte
   - ShareKit/Core (3.0.0):
     - SAMTextView (~> 0.2.1)
     - SDWebImage (~> 3.7.1)
@@ -56,70 +22,20 @@ PODS:
     - ShareKit/Reachability
     - SSKeychain (~> 1.2.2)
     - UIActivityIndicator-for-SDWebImage (~> 1.2)
-  - ShareKit/Delicious (3.0.0):
-    - ShareKit/Core
-  - ShareKit/Diigo (3.0.0):
-    - ShareKit/Core
-  - ShareKit/Dropbox (3.0.0):
-    - Dropbox-iOS-SDK (~> 1.3.11)
-    - ShareKit/Core
   - ShareKit/Evernote (3.0.0):
     - Evernote-SDK-iOS (~> 1.3.1)
     - ShareKit/Core
   - ShareKit/Facebook (3.0.0):
     - Facebook-iOS-SDK (~> 3.16.2)
     - ShareKit/Core
-  - ShareKit/Flickr (3.0.0):
-    - ShareKit/Core
-  - ShareKit/Foursquare (3.0.0):
-    - ShareKit/Core
-  - ShareKit/GooglePlus (3.0.0):
-    - ShareKit/Core
-  - ShareKit/Hatena (3.0.0):
-    - ShareKit/Core
-  - ShareKit/Imgur (3.0.0):
-    - ShareKit/Core
-  - ShareKit/Instagram (3.0.0):
-    - ShareKit/Core
-  - ShareKit/Instapaper (3.0.0):
-    - ShareKit/Core
-  - ShareKit/Kippt (3.0.0):
-    - ShareKit/Core
-  - ShareKit/LinkedIn (3.0.0):
-    - ShareKit/Core
   - ShareKit/NoARC (3.0.0):
     - PKMultipartInputStream
-    - ShareKit/Core
-  - ShareKit/OneNote (3.0.0):
-    - ShareKit/Core
-  - ShareKit/Open in 1Password (3.0.0):
-    - ShareKit/Core
-  - ShareKit/Open in Google Chrome (3.0.0):
-    - ShareKit/Core
-  - ShareKit/Pinboard (3.0.0):
-    - ShareKit/Core
-  - ShareKit/Pinterest (3.0.0):
-    - Pinterest-iOS (~> 2.3)
-    - ShareKit/Core
-  - ShareKit/Plurk (3.0.0):
     - ShareKit/Core
   - ShareKit/Pocket (3.0.0):
     - PocketAPI (~> 1.0.2)
     - ShareKit/Core
   - ShareKit/Reachability (3.0.0)
-  - ShareKit/Readability (3.0.0):
-    - ShareKit/Core
-  - ShareKit/ReadingList (3.0.0):
-    - ShareKit/Core
-  - ShareKit/ReadItLater (3.0.0):
-    - ShareKit/Core
-  - ShareKit/SinaWeibo (3.0.0):
-    - ShareKit/Core
-  - ShareKit/Tumblr (3.0.0):
-    - ShareKit/Core
   - ShareKit/Twitter (3.0.0):
-    - ShareKit/Core
-  - ShareKit/Vkontakte (3.0.0):
     - ShareKit/Core
   - SSKeychain (1.2.2)
   - TestFlightSDK (3.0.2)
@@ -130,18 +46,19 @@ DEPENDENCIES:
   - FlurrySDK (~> 5.4)
   - Google-AdMob-Ads-SDK (~> 6.12)
   - iNotify (~> 1.5)
-  - ShareKit (~> 3.0)
+  - ShareKit/Evernote
+  - ShareKit/Facebook
+  - ShareKit/Pocket
+  - ShareKit/Twitter
   - TestFlightSDK (~> 3.0)
 
 SPEC CHECKSUMS:
   Bolts: 3db0a875235e0c9042b013af13af0f00f79b102c
-  Dropbox-iOS-SDK: 367160c05e279e7fa3205f3233d1873b7a986ee6
   Evernote-SDK-iOS: 92f4eb30d74d2fb3b495fe216d73aac67a68e6d3
   Facebook-iOS-SDK: 34eef640c2cc4c8618ba0f574ad2b290e07f1b4e
   FlurrySDK: bed9e5598353f867508d164795a451e3ada92cb6
   Google-AdMob-Ads-SDK: c6ef102829828ae16eec879afa2c8921413a8f06
   iNotify: 892c0bc5be71187e5eefe212f5f611df4a3ca4c0
-  Pinterest-iOS: 418044a91ac88d370a54ce06b89ee034c240171d
   PKMultipartInputStream: 9e18cd438cbfb8900ccb4d26b3f848768cd92e10
   PocketAPI: 801df1a3cdd094e5477add10c80dceb533c98a66
   SAMTextView: 1062a784ba7b2080b0c17748001c416b53010b4b

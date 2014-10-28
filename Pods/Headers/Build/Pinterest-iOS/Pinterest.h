@@ -1,1 +1,0 @@
-../../../Pinterest-iOS/PinItSDKiOS/Pinterest.embeddedframework/Pinterest.framework/Versions/A/Headers/Pinterest.h

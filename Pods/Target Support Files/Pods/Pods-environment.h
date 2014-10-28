@@ -12,12 +12,6 @@
 #define COCOAPODS_VERSION_MINOR_Bolts 1
 #define COCOAPODS_VERSION_PATCH_Bolts 3
 
-// Dropbox-iOS-SDK
-#define COCOAPODS_POD_AVAILABLE_Dropbox_iOS_SDK
-#define COCOAPODS_VERSION_MAJOR_Dropbox_iOS_SDK 1
-#define COCOAPODS_VERSION_MINOR_Dropbox_iOS_SDK 3
-#define COCOAPODS_VERSION_PATCH_Dropbox_iOS_SDK 13
-
 // Evernote-SDK-iOS
 #define COCOAPODS_POD_AVAILABLE_Evernote_SDK_iOS
 #define COCOAPODS_VERSION_MAJOR_Evernote_SDK_iOS 1
@@ -54,12 +48,6 @@
 #define COCOAPODS_VERSION_MINOR_PKMultipartInputStream 1
 #define COCOAPODS_VERSION_PATCH_PKMultipartInputStream 0
 
-// Pinterest-iOS
-#define COCOAPODS_POD_AVAILABLE_Pinterest_iOS
-#define COCOAPODS_VERSION_MAJOR_Pinterest_iOS 2
-#define COCOAPODS_VERSION_MINOR_Pinterest_iOS 3
-#define COCOAPODS_VERSION_PATCH_Pinterest_iOS 0
-
 // PocketAPI
 #define COCOAPODS_POD_AVAILABLE_PocketAPI
 #define COCOAPODS_VERSION_MAJOR_PocketAPI 1
@@ -90,35 +78,11 @@
 #define COCOAPODS_VERSION_MINOR_SSKeychain 2
 #define COCOAPODS_VERSION_PATCH_SSKeychain 2
 
-// ShareKit
-#define COCOAPODS_POD_AVAILABLE_ShareKit
-#define COCOAPODS_VERSION_MAJOR_ShareKit 3
-#define COCOAPODS_VERSION_MINOR_ShareKit 0
-#define COCOAPODS_VERSION_PATCH_ShareKit 0
-
 // ShareKit/Core
 #define COCOAPODS_POD_AVAILABLE_ShareKit_Core
 #define COCOAPODS_VERSION_MAJOR_ShareKit_Core 3
 #define COCOAPODS_VERSION_MINOR_ShareKit_Core 0
 #define COCOAPODS_VERSION_PATCH_ShareKit_Core 0
-
-// ShareKit/Delicious
-#define COCOAPODS_POD_AVAILABLE_ShareKit_Delicious
-#define COCOAPODS_VERSION_MAJOR_ShareKit_Delicious 3
-#define COCOAPODS_VERSION_MINOR_ShareKit_Delicious 0
-#define COCOAPODS_VERSION_PATCH_ShareKit_Delicious 0
-
-// ShareKit/Diigo
-#define COCOAPODS_POD_AVAILABLE_ShareKit_Diigo
-#define COCOAPODS_VERSION_MAJOR_ShareKit_Diigo 3
-#define COCOAPODS_VERSION_MINOR_ShareKit_Diigo 0
-#define COCOAPODS_VERSION_PATCH_ShareKit_Diigo 0
-
-// ShareKit/Dropbox
-#define COCOAPODS_POD_AVAILABLE_ShareKit_Dropbox
-#define COCOAPODS_VERSION_MAJOR_ShareKit_Dropbox 3
-#define COCOAPODS_VERSION_MINOR_ShareKit_Dropbox 0
-#define COCOAPODS_VERSION_PATCH_ShareKit_Dropbox 0
 
 // ShareKit/Evernote
 #define COCOAPODS_POD_AVAILABLE_ShareKit_Evernote
@@ -132,101 +96,11 @@
 #define COCOAPODS_VERSION_MINOR_ShareKit_Facebook 0
 #define COCOAPODS_VERSION_PATCH_ShareKit_Facebook 0
 
-// ShareKit/Flickr
-#define COCOAPODS_POD_AVAILABLE_ShareKit_Flickr
-#define COCOAPODS_VERSION_MAJOR_ShareKit_Flickr 3
-#define COCOAPODS_VERSION_MINOR_ShareKit_Flickr 0
-#define COCOAPODS_VERSION_PATCH_ShareKit_Flickr 0
-
-// ShareKit/Foursquare
-#define COCOAPODS_POD_AVAILABLE_ShareKit_Foursquare
-#define COCOAPODS_VERSION_MAJOR_ShareKit_Foursquare 3
-#define COCOAPODS_VERSION_MINOR_ShareKit_Foursquare 0
-#define COCOAPODS_VERSION_PATCH_ShareKit_Foursquare 0
-
-// ShareKit/GooglePlus
-#define COCOAPODS_POD_AVAILABLE_ShareKit_GooglePlus
-#define COCOAPODS_VERSION_MAJOR_ShareKit_GooglePlus 3
-#define COCOAPODS_VERSION_MINOR_ShareKit_GooglePlus 0
-#define COCOAPODS_VERSION_PATCH_ShareKit_GooglePlus 0
-
-// ShareKit/Hatena
-#define COCOAPODS_POD_AVAILABLE_ShareKit_Hatena
-#define COCOAPODS_VERSION_MAJOR_ShareKit_Hatena 3
-#define COCOAPODS_VERSION_MINOR_ShareKit_Hatena 0
-#define COCOAPODS_VERSION_PATCH_ShareKit_Hatena 0
-
-// ShareKit/Imgur
-#define COCOAPODS_POD_AVAILABLE_ShareKit_Imgur
-#define COCOAPODS_VERSION_MAJOR_ShareKit_Imgur 3
-#define COCOAPODS_VERSION_MINOR_ShareKit_Imgur 0
-#define COCOAPODS_VERSION_PATCH_ShareKit_Imgur 0
-
-// ShareKit/Instagram
-#define COCOAPODS_POD_AVAILABLE_ShareKit_Instagram
-#define COCOAPODS_VERSION_MAJOR_ShareKit_Instagram 3
-#define COCOAPODS_VERSION_MINOR_ShareKit_Instagram 0
-#define COCOAPODS_VERSION_PATCH_ShareKit_Instagram 0
-
-// ShareKit/Instapaper
-#define COCOAPODS_POD_AVAILABLE_ShareKit_Instapaper
-#define COCOAPODS_VERSION_MAJOR_ShareKit_Instapaper 3
-#define COCOAPODS_VERSION_MINOR_ShareKit_Instapaper 0
-#define COCOAPODS_VERSION_PATCH_ShareKit_Instapaper 0
-
-// ShareKit/Kippt
-#define COCOAPODS_POD_AVAILABLE_ShareKit_Kippt
-#define COCOAPODS_VERSION_MAJOR_ShareKit_Kippt 3
-#define COCOAPODS_VERSION_MINOR_ShareKit_Kippt 0
-#define COCOAPODS_VERSION_PATCH_ShareKit_Kippt 0
-
-// ShareKit/LinkedIn
-#define COCOAPODS_POD_AVAILABLE_ShareKit_LinkedIn
-#define COCOAPODS_VERSION_MAJOR_ShareKit_LinkedIn 3
-#define COCOAPODS_VERSION_MINOR_ShareKit_LinkedIn 0
-#define COCOAPODS_VERSION_PATCH_ShareKit_LinkedIn 0
-
 // ShareKit/NoARC
 #define COCOAPODS_POD_AVAILABLE_ShareKit_NoARC
 #define COCOAPODS_VERSION_MAJOR_ShareKit_NoARC 3
 #define COCOAPODS_VERSION_MINOR_ShareKit_NoARC 0
 #define COCOAPODS_VERSION_PATCH_ShareKit_NoARC 0
-
-// ShareKit/OneNote
-#define COCOAPODS_POD_AVAILABLE_ShareKit_OneNote
-#define COCOAPODS_VERSION_MAJOR_ShareKit_OneNote 3
-#define COCOAPODS_VERSION_MINOR_ShareKit_OneNote 0
-#define COCOAPODS_VERSION_PATCH_ShareKit_OneNote 0
-
-// ShareKit/Open in 1Password
-#define COCOAPODS_POD_AVAILABLE_ShareKit_Open_in_1Password
-#define COCOAPODS_VERSION_MAJOR_ShareKit_Open_in_1Password 3
-#define COCOAPODS_VERSION_MINOR_ShareKit_Open_in_1Password 0
-#define COCOAPODS_VERSION_PATCH_ShareKit_Open_in_1Password 0
-
-// ShareKit/Open in Google Chrome
-#define COCOAPODS_POD_AVAILABLE_ShareKit_Open_in_Google_Chrome
-#define COCOAPODS_VERSION_MAJOR_ShareKit_Open_in_Google_Chrome 3
-#define COCOAPODS_VERSION_MINOR_ShareKit_Open_in_Google_Chrome 0
-#define COCOAPODS_VERSION_PATCH_ShareKit_Open_in_Google_Chrome 0
-
-// ShareKit/Pinboard
-#define COCOAPODS_POD_AVAILABLE_ShareKit_Pinboard
-#define COCOAPODS_VERSION_MAJOR_ShareKit_Pinboard 3
-#define COCOAPODS_VERSION_MINOR_ShareKit_Pinboard 0
-#define COCOAPODS_VERSION_PATCH_ShareKit_Pinboard 0
-
-// ShareKit/Pinterest
-#define COCOAPODS_POD_AVAILABLE_ShareKit_Pinterest
-#define COCOAPODS_VERSION_MAJOR_ShareKit_Pinterest 3
-#define COCOAPODS_VERSION_MINOR_ShareKit_Pinterest 0
-#define COCOAPODS_VERSION_PATCH_ShareKit_Pinterest 0
-
-// ShareKit/Plurk
-#define COCOAPODS_POD_AVAILABLE_ShareKit_Plurk
-#define COCOAPODS_VERSION_MAJOR_ShareKit_Plurk 3
-#define COCOAPODS_VERSION_MINOR_ShareKit_Plurk 0
-#define COCOAPODS_VERSION_PATCH_ShareKit_Plurk 0
 
 // ShareKit/Pocket
 #define COCOAPODS_POD_AVAILABLE_ShareKit_Pocket
@@ -240,47 +114,11 @@
 #define COCOAPODS_VERSION_MINOR_ShareKit_Reachability 0
 #define COCOAPODS_VERSION_PATCH_ShareKit_Reachability 0
 
-// ShareKit/ReadItLater
-#define COCOAPODS_POD_AVAILABLE_ShareKit_ReadItLater
-#define COCOAPODS_VERSION_MAJOR_ShareKit_ReadItLater 3
-#define COCOAPODS_VERSION_MINOR_ShareKit_ReadItLater 0
-#define COCOAPODS_VERSION_PATCH_ShareKit_ReadItLater 0
-
-// ShareKit/Readability
-#define COCOAPODS_POD_AVAILABLE_ShareKit_Readability
-#define COCOAPODS_VERSION_MAJOR_ShareKit_Readability 3
-#define COCOAPODS_VERSION_MINOR_ShareKit_Readability 0
-#define COCOAPODS_VERSION_PATCH_ShareKit_Readability 0
-
-// ShareKit/ReadingList
-#define COCOAPODS_POD_AVAILABLE_ShareKit_ReadingList
-#define COCOAPODS_VERSION_MAJOR_ShareKit_ReadingList 3
-#define COCOAPODS_VERSION_MINOR_ShareKit_ReadingList 0
-#define COCOAPODS_VERSION_PATCH_ShareKit_ReadingList 0
-
-// ShareKit/SinaWeibo
-#define COCOAPODS_POD_AVAILABLE_ShareKit_SinaWeibo
-#define COCOAPODS_VERSION_MAJOR_ShareKit_SinaWeibo 3
-#define COCOAPODS_VERSION_MINOR_ShareKit_SinaWeibo 0
-#define COCOAPODS_VERSION_PATCH_ShareKit_SinaWeibo 0
-
-// ShareKit/Tumblr
-#define COCOAPODS_POD_AVAILABLE_ShareKit_Tumblr
-#define COCOAPODS_VERSION_MAJOR_ShareKit_Tumblr 3
-#define COCOAPODS_VERSION_MINOR_ShareKit_Tumblr 0
-#define COCOAPODS_VERSION_PATCH_ShareKit_Tumblr 0
-
 // ShareKit/Twitter
 #define COCOAPODS_POD_AVAILABLE_ShareKit_Twitter
 #define COCOAPODS_VERSION_MAJOR_ShareKit_Twitter 3
 #define COCOAPODS_VERSION_MINOR_ShareKit_Twitter 0
 #define COCOAPODS_VERSION_PATCH_ShareKit_Twitter 0
-
-// ShareKit/Vkontakte
-#define COCOAPODS_POD_AVAILABLE_ShareKit_Vkontakte
-#define COCOAPODS_VERSION_MAJOR_ShareKit_Vkontakte 3
-#define COCOAPODS_VERSION_MINOR_ShareKit_Vkontakte 0
-#define COCOAPODS_VERSION_PATCH_ShareKit_Vkontakte 0
 
 // TestFlightSDK
 #define COCOAPODS_POD_AVAILABLE_TestFlightSDK
